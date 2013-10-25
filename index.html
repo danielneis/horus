@@ -25,158 +25,160 @@
                         </div>
                         <h3>Informe sua idade</h3>
                         <div class="row-fluid">
-                            <input />
+                            <div class="span2 offset1"><input /></div>
                         </div>
                         <h3>Selecione a imagem que mais representa você</h3>
                         <div class="row-fluid">
-                            <div class="span6">
+                            <div class="span5 offset1">
                                 <label for="meninoBranco">
-                                    <img src="img/meninoBranco.png" alt="MeninoBranco"/>
+                                    <img src="img/meninoBranco.png" class="span4" alt="MeninoBranco"/>
                                 </label>
                                 <input id="meninoBranco" name="sexo_e_raca[]" type="radio" value="meninoBranco" />
                             </div>
-                            <div class="span6">
+                            <div class="span5">
                                 <label for="meninoNegro">
-                                    <img src="img/meninoNegro.png" alt="MeninoNegro"/>
+                                    <img src="img/meninoNegro.png" class="span4" alt="MeninoNegro"/>
                                 </label>
                                 <input id="meninoNegro"  name="sexo_e_raca[]" type="radio" value="meninoBranco" />
                             </div>
                         </div>
-                    <div class="row-fluid">
-                        <div class="span6">
-                            <label for="meninaBranca">
-                                <img src="img/meninaBranca.png" alt="MeninaBranca"/>
-                            </label>
-                            <input id="meninaBranca" name="sexo_e_raca[]" type="radio" value="meninaBranca" />
+                        <div class="row-fluid">
+                            <div class="span5 offset1">
+                                <label for="meninaBranca">
+                                    <img src="img/meninaBranca.png" class="span4" alt="MeninaBranca"/>
+                                </label>
+                                <input id="meninaBranca" name="sexo_e_raca[]" type="radio" value="meninaBranca" />
+                            </div>
+                            <div class="span5">
+                                <label for="meninaNegra">
+                                    <img src="img/meninaNegra.png" class="span4" alt="MeninaNegra"/>
+                                </label>
+                                <input id="meninaNegra"  name="sexo_e_raca[]" type="radio" value="meninaBranca" />
+                            </div>
                         </div>
-                        <div class="span6">
-                            <label for="meninaNegra">
-                                <img src="img/meninaNegra.png" alt="MeninaNegra"/>
-                            </label>
-                            <input id="meninaNegra"  name="sexo_e_raca[]" type="radio" value="meninaBranca" />
+                    </div>
+                    <div class="tab-pane" id="tab2">
+                        <div class="progress progress-striped active">
+                            <div class="bar" style="width: 25%;"></div>
+                        </div>
+                        <h3>Risco Nutricional</h3>
+                        <div class="row-fluid">
+                            <div class="span2">Peso</div>
+                            <div class="span2"><input /></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2">Altura</div>
+                            <div class="span2"><input /></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2">Circunferência abdominal</div>
+                            <div class="span2"><input /></div>
+                        </div>
+                        <h3>Risco de Doenças Crônicas</h3>
+                        <div class="row-fluid">
+                            <div class="span2">Pressão Arterial Sistólica</div>
+                            <div class="span2"><input /></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2">Pressão Diastólica</div>
+                            <div class="span2"><input /></div>
                         </div>
                     </div>
-                </div>
-                <div class="tab-pane" id="tab2">
-                    <div class="progress progress-striped active">
-                        <div class="bar" style="width: 25%;"></div>
+                    <div class="tab-pane" id="tab3">
+                        <div class="progress progress-striped active">
+                            <div class="bar" style="width: 50%;"></div>
+                        </div>
+                        <h3>Obesidade em relação aos pais</h3>
+                        <div class="row-fluid">
+                            <div class="span2"><label for="obesidadePaiOuMae" >Pai ou Mae</label></div>
+                            <div class="span2"><input type="radio" name="obesidade" id="obesidadePai" value="paimae" /></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2"><label for="obesidadeAmbos" >Ambos</label></div>
+                            <div class="span2"><input type="radio" name="obesidade" id="obesidadeAmbos" value="ambos" /></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2"><label for="obesidadeNenhum" >Nenhum</label></div>
+                            <div class="span2"><input type="radio" name="obesidade" id="obesidadeNenhum" value="nenhum" /></div>
+                        </div>
                     </div>
-                    <h3>Risco Nutricional</h3>
-                    <div class="row-fluid">
-                        <div class="span2">Peso</div>
-                        <div class="span2"><input /></div>
+                    <div class="tab-pane" id="tab4">
+                        <div class="progress progress-striped active">
+                            <div class="bar" style="width: 75%;"></div>
+                        </div>
+                        <h3>Atividade física semanal</h3>
+                        <div class="row-fluid">
+                            <div class="span2"><p>Tipo</p></div>
+                            <div class="span3"><p>Dias na semana</p></div>
+                            <div class="span3"><p>Minutos por sessão</p></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2"><label for="esportesLivresFreq" >Esportes Livres</label></div>
+                            <div class="span3"><input type="range"  id="esportesLivresFreq" min="0" max="7" step="1" value="0"><span id="esportesLivresFreqLabel"></span></div>
+                            <div class="span3"><input type="number" id="esportesLivresMinDiarios"></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2"><label for="esportesColFreq" >Esportes Coletivos</label></div>
+                            <div class="span3"><input type="range"  id="esportesColFreq" min="0" max="7" step="1" value="0"><span id="esportesColFreqLabel"></span></div>
+                            <div class="span3"><input type="number" id="esportesColMinDiarios"></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2"><label for="esportesAcadFreq" >Esportes Livres</label></div>
+                            <div class="span3"><input type="range"  id="esportesAcadFreq" min="0" max="7" step="1" value="0"><span id="esportesAcadFreqLabel"></span></div>
+                            <div class="span3"><input type="number" id="esportesAcadMinDiarios"></div>
+                        </div>
                     </div>
-                    <div class="row-fluid">
-                        <div class="span2">Altura</div>
-                        <div class="span2"><input /></div>
+                    <div class="tab-pane" id="tab5">
+                        <div class="progress progress-striped active">
+                            <div class="bar" style="width: 100%;"></div>
+                        </div>
+                        <h3>Diagnóstico do estado nutricional</h3>
+                        <div class="row-fluid">
+                            <div class="span2">IMC:</div>
+                            <div class="span2"><input /></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2">Circunferência Abdominal:</div>
+                            <div class="span2"><input /></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2">Pressão Arterial:</div>
+                            <div class="span2"><input /></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2">Obesidade em relação aos pais:</div>
+                            <div class="span2"><input /></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2">Ativiade Física Semanal:</div>
+                            <div class="span2"><input /></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2">Tempo médio Atividade Física Semanal:</div>
+                            <div class="span2"><input /></div>
+                        </div>
+                        <h3>Diagnóstico Provável</h3>
+                        <div class="row-fluid">
+                            <div class="span2">Baixo Peso:</div>
+                            <div class="span2"><input /></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2">Pressão Normal</div>
+                            <div class="span2"><input /></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2">Sobrepeso:</div>
+                            <div class="span2"><input /></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2">Obesidade:</div>
+                            <div class="span2"><input /></div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span2">Total Calórico:</div>
+                            <div class="span2"><input /></div>
+                        </div>
                     </div>
-                    <div class="row-fluid">
-                        <div class="span2">Circunferência abdominal</div>
-                        <div class="span2"><input /></div>
-                    </div>
-                    <h3>Risco de Doenças Crônicas</h3>
-                    <div class="row-fluid">
-                        <div class="span2">Pressão Arterial Sistólica</div>
-                        <div class="span2"><input /></div>
-                    </div>
-                    <div class="row-fluid">
-                        <div class="span2">Pressão Diastólica</div>
-                        <div class="span2"><input /></div>
-                    </div>
-                    </div>
-            <div class="tab-pane" id="tab3">
-                <div class="progress progress-striped active">
-                    <div class="bar" style="width: 50%;"></div>
-                </div>
-                <h3>Obesidade em relação aos pais</h3>
-                <div class="row-fluid">
-                    <div class="span2"><label for="obesidadePaiOuMae" >Pai ou Mae</label></div>
-                    <div class="span2"><input type="radio" name="obesidade" id="obesidadePai" value="paimae" /></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2"><label for="obesidadeAmbos" >Ambos</label></div>
-                    <div class="span2"><input type="radio" name="obesidade" id="obesidadeAmbos" value="ambos" /></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2"><label for="obesidadeNenhum" >Nenhum</label></div>
-                    <div class="span2"><input type="radio" name="obesidade" id="obesidadeNenhum" value="nenhum" /></div>
-                </div>
-            </div>
-            <div class="tab-pane" id="tab4">
-                <div class="progress progress-striped active">
-                    <div class="bar" style="width: 75%;"></div>
-                </div>
-                <h3>Atividade física semanal</h3>
-                <div class="row-fluid">
-                    <div class="span2"><p>Tipo</p></div>
-                    <div class="span3"><p>Dias na semana</p></div>
-                    <div class="span3"><p>Minutos por sessão</p></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2"><label for="esportesLivresFreq" >Esportes Livres</label></div>
-                    <div class="span3"><input type="range"  id="esportesLivresFreq" min="0" max="7" step="1" value="0"><span id="esportesLivresFreqLabel"></span></div>
-                    <div class="span3"><input type="number" id="esportesLivresMinDiarios"></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2"><label for="esportesColFreq" >Esportes Coletivos</label></div>
-                    <div class="span3"><input type="range"  id="esportesColFreq" min="0" max="7" step="1" value="0"><span id="esportesColFreqLabel"></span></div>
-                    <div class="span3"><input type="number" id="esportesColMinDiarios"></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2"><label for="esportesAcadFreq" >Esportes Livres</label></div>
-                    <div class="span3"><input type="range"  id="esportesAcadFreq" min="0" max="7" step="1" value="0"><span id="esportesAcadFreqLabel"></span></div>
-                    <div class="span3"><input type="number" id="esportesAcadMinDiarios"></div>
-                </div>
-            </div>
-            <div class="tab-pane" id="tab5">
-                <div class="progress progress-striped active">
-                    <div class="bar" style="width: 100%;"></div>
-                </div>
-                <h3>Diagnóstico do estado nutricional</h3>
-                <div class="row-fluid">
-                    <div class="span2">IMC:</div>
-                    <div class="span2"><input /></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2">Circunferência Abdominal:</div>
-                    <div class="span2"><input /></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2">Pressão Arterial:</div>
-                    <div class="span2"><input /></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2">Obesidade em relação aos pais:</div>
-                    <div class="span2"><input /></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2">Ativiade Física Semanal:</div>
-                    <div class="span2"><input /></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2">Tempo médio Atividade Física Semanal:</div>
-                    <div class="span2"><input /></div>
-                </div>
-                <h3>Diagnóstico Provável</h3>
-                <div class="row-fluid">
-                    <div class="span2">Baixo Peso:</div>
-                    <div class="span2"><input /></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2">Pressão Normal</div>
-                    <div class="span2"><input /></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2">Sobrepeso:</div>
-                    <div class="span2"><input /></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2">Obesidade:</div>
-                    <div class="span2"><input /></div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2">Total Calórico:</div>
-                    <div class="span2"><input /></div>
                 </div>
             </div>
 
