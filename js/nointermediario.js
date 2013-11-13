@@ -23,12 +23,12 @@ $(function() {
                 return (1/delta);
             }
 
-            function calcula_ProbCond(&prob_condicional, valor1, valor2, valor3) {
+            function calcula_ProbCond(valor1, valor2, valor3) {
                 prob_cond1 = valor1;
                 prob_cond2 = valor2;
                 alfa       = valor3;
 
-                prob_condicional = ((prob_cond1*prob_cond2)*alfa);
+                return ((prob_cond1*prob_cond2)*alfa);
             }
 
             function calcula_ProbCond_RN_EN(&prob_condicional, valor1, valor2, valor3, valor4, valor5, valor6, valor7, valor8) {

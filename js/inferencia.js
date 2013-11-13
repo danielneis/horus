@@ -86,7 +86,7 @@ $(function() {
             return ((RDCA*RDCA_AFO)+(RDCP*RDCP_AFO));
         }
 
-        function calculaProbInicialPA(&prob_ini, valor1, valor2, valor3, valor4)
+        function calculaProbInicialPA(valor1, valor2, valor3, valor4)
         {
             //CÁLCULA PROBABILIDADE INICIAL DO NÓ PRESSÃO ARTERIAL
             RDCA_PA = valor1;
@@ -94,8 +94,7 @@ $(function() {
             RDCA    = valor3;
             RDCP    = valor4;
 
-            //echo "((RDCA*RDCA_PA)+(RDCP*RDCP_PA))<br>";
-            prob_ini = ((RDCA*RDCA_PA)+(RDCP*RDCP_PA));
+            return ((RDCA*RDCA_PA)+(RDCP*RDCP_PA));
         }
 
         function define_idade(&idade_c, idade_r)
