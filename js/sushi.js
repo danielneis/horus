@@ -9,7 +9,7 @@ $(function(){
     $("#esportesColFreq").on('change', function(evnt) {
         $("#esportesColFreqLabel").text($('#esportesColFreq').val());
     });
-   
+
     $('#esportesAcadFreqLabel').text($('#esportesAcadFreq').val());
     $("#esportesAcadFreq").on('change', function(evnt) {
         $("#esportesAcadFreqLabel").text($('#esportesAcadFreq').val());
@@ -22,7 +22,7 @@ $(function(){
         var peso = $("").val();
         var altura = $("").val();
         var ca = $("").val();
-        var ca = $("").val();
+        var ca_valor = $("").val();
         var raca = $("").val();
         var pa  = $("").val();
         var pa_sist = $("").val();
@@ -32,7 +32,7 @@ $(function(){
 
         // equivalente as chamadas aos metodos "Consultar"
         var resultado = [];
-        resultado.rn = [ ENBP_RNB =  0.45, ENBP_RNM =  0.5, ENBP_RNE =  0.05, ENPN_RNB =  0.99, ENPN_RNM =  0.007, 
+        resultado.rn = [ ENBP_RNB =  0.45, ENBP_RNM =  0.5, ENBP_RNE =  0.05, ENPN_RNB =  0.99, ENPN_RNM =  0.007,
                          ENPN_RNE =  0.003, ENSP_RNB =  0.3, ENSP_RNM =  0.67, ENSP_RNE =  0.03, ENO_RNB  =  0.005,
                          ENO_RNM  =  0.045, ENO_RNE  =  0.95 ]
 
@@ -73,7 +73,7 @@ $(function(){
 
         prob_ini_imc_bp = inferencia.calculaProbInicialIMC(resultado.imc["RNB_IMCBP"], resultado.imc["RNM_IMCBP"], resultado.imc["RNE_IMCBP"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
         prob_ini_imc_pn = inferencia.calculaProbInicialIMC(resultado.imc["RNB_IMCPN"], resultado.imc["RNM_IMCPN"], resultado.imc["RNE_IMCPN"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
-        prob_ini_imc_sp = inferencia.calculaProbInicialIMC(resultado.imc["RNB_IMCSP"], resultado.imc["RNM_IMCSP"], resultado.imc["RNE_IMCSP"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);  
+        prob_ini_imc_sp = inferencia.calculaProbInicialIMC(resultado.imc["RNB_IMCSP"], resultado.imc["RNM_IMCSP"], resultado.imc["RNE_IMCSP"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
         prob_ini_imc_ob = inferencia.calculaProbInicialIMC(resultado.imc["RNB_IMCO"], resultado.imc["RNM_IMCO"], resultado.imc["RNE_IMCO"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
 
         prob_ini_ca_adeq = inferencia.calculaProbInicialCA(resultado.ca["RNB_CAAd"], resultado.ca["RNM_CAAd"], resultado.ca["RNE_CAAd"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
@@ -93,7 +93,7 @@ $(function(){
         prob_ini_pa_n = inferencia.calculaProbInicialPA(resultado.pa["RDCA_PAN"], resultado.pa["RDCP_PAN"], prob_rdc_a, prob_rdc_p);
         prob_ini_pa_a = inferencia.calculaProbInicialPA(resultado.pa["RDCA_PAA"], resultado.pa["RDCP_PAA"], prob_rdc_a, prob_rdc_p);
 
-        var valor_imc = imc.Calcular_imc(peso_r, altura_r); 
+        var valor_imc = imc.Calcular_imc(peso_r, altura_r);
 
         if (sexo_r == "F") {
             valor_percentil5 = imc.Calcular_percentil5_fem(idade_r);
@@ -106,53 +106,53 @@ $(function(){
             valor_percentil95 = imc.Calcular_percentil95_masc(idade_r);
         }
 
-        evidencia_imc = imc.Instanciar_imc(valor_imc, valor_percentil5, valor_percentil85, valor_percentil95);
+        evidencia_imc = imc.calcular_evidencia_imc(valor_imc, valor_percentil5, valor_percentil85, valor_percentil95);
 
         if (evidencia_imc == "Abaixo do Peso"){
 
-            delta_imc = no_intermediario.calcula_Delta_Risco_Nut(resultado_imc["RNB_IMCBP"], resultado_imc["RNM_IMCBP"], resultado_imc["RNE_IMCBP"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
+            delta_imc = no_intermediario.calcula_Delta_Risco_Nut(resultado.imc["RNB_IMCBP"], resultado.imc["RNM_IMCBP"], resultado.imc["RNE_IMCBP"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
             alfa_imc =  no_intermediario.calcula_Alfa(delta_imc);
 
-            prob_rn_baixo    = no_intermediario.calcula_ProbCond(resultado_imc["RNB_IMCBP"], prob_rn_baixo, alfa_imc);
-            prob_rn_moderado = no_intermediario.calcula_ProbCond(resultado_imc["RNM_IMCBP"], prob_rn_moderado, alfa_imc);
-            prob_rn_elevado  = no_intermediario.calcula_ProbCond(resultado_imc["RNE_IMCBP"], prob_rn_elevado, alfa_imc);
+            prob_rn_baixo    = no_intermediario.calcula_ProbCond(resultado.imc["RNB_IMCBP"], prob_rn_baixo, alfa_imc);
+            prob_rn_moderado = no_intermediario.calcula_ProbCond(resultado.imc["RNM_IMCBP"], prob_rn_moderado, alfa_imc);
+            prob_rn_elevado  = no_intermediario.calcula_ProbCond(resultado.imc["RNE_IMCBP"], prob_rn_elevado, alfa_imc);
 
         }else if(evidencia_imc == "Peso Normal"){
 
-            delta_imc = no_intermediario.calcula_Delta_Risco_Nut(resultado_imc["RNB_IMCPN"], resultado_imc["RNM_IMCPN"], resultado_imc["RNE_IMCPN"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
+            delta_imc = no_intermediario.calcula_Delta_Risco_Nut(resultado.imc["RNB_IMCPN"], resultado.imc["RNM_IMCPN"], resultado.imc["RNE_IMCPN"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
             alfa_imc =  no_intermediario.calcula_Alfa(delta_imc);
 
-            prob_rn_baixo    = no_intermediario.calcula_ProbCond(resultado_imc["RNB_IMCPN"], prob_rn_baixo, alfa_imc);
-            prob_rn_moderado = no_intermediario.calcula_ProbCond(resultado_imc["RNM_IMCPN"], prob_rn_moderado, alfa_imc);
-            prob_rn_elevado  = no_intermediario.calcula_ProbCond(resultado_imc["RNE_IMCPN"], prob_rn_elevado, alfa_imc);
+            prob_rn_baixo    = no_intermediario.calcula_ProbCond(resultado.imc["RNB_IMCPN"], prob_rn_baixo, alfa_imc);
+            prob_rn_moderado = no_intermediario.calcula_ProbCond(resultado.imc["RNM_IMCPN"], prob_rn_moderado, alfa_imc);
+            prob_rn_elevado  = no_intermediario.calcula_ProbCond(resultado.imc["RNE_IMCPN"], prob_rn_elevado, alfa_imc);
 
         }else if(evidencia_imc == "Sobrepeso"){
 
-            delta_imc = no_intermediario.calcula_Delta_Risco_Nut(resultado_imc["RNB_IMCSP"], resultado_imc["RNM_IMCSP"], resultado_imc["RNE_IMCSP"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
+            delta_imc = no_intermediario.calcula_Delta_Risco_Nut(resultado.imc["RNB_IMCSP"], resultado.imc["RNM_IMCSP"], resultado.imc["RNE_IMCSP"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
             alfa_imc =  no_intermediario.calcula_Alfa(delta_imc);
 
-            prob_rn_baixo    = no_intermediario.calcula_ProbCond(resultado_imc["RNB_IMCSP"], prob_rn_baixo, alfa_imc);
-            prob_rn_moderado = no_intermediario.calcula_ProbCond(resultado_imc["RNM_IMCSP"], prob_rn_moderado, alfa_imc);
-            prob_rn_elevado  = no_intermediario.calcula_ProbCond(resultado_imc["RNE_IMCSP"], prob_rn_elevado, alfa_imc);
+            prob_rn_baixo    = no_intermediario.calcula_ProbCond(resultado.imc["RNB_IMCSP"], prob_rn_baixo, alfa_imc);
+            prob_rn_moderado = no_intermediario.calcula_ProbCond(resultado.imc["RNM_IMCSP"], prob_rn_moderado, alfa_imc);
+            prob_rn_elevado  = no_intermediario.calcula_ProbCond(resultado.imc["RNE_IMCSP"], prob_rn_elevado, alfa_imc);
 
         }else if(evidencia_imc == "Obesidade"){
 
-            delta_imc = no_intermediario.calcula_Delta_Risco_Nut(resultado_imc["RNB_IMCO"], resultado_imc["RNM_IMCO"], resultado_imc["RNE_IMCO"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
+            delta_imc = no_intermediario.calcula_Delta_Risco_Nut(resultado.imc["RNB_IMCO"], resultado.imc["RNM_IMCO"], resultado.imc["RNE_IMCO"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
             alfa_imc =  no_intermediario.calcula_Alfa(delta_imc);
 
-            prob_rn_baixo    = no_intermediario.calcula_ProbCond(resultado_imc["RNB_IMCO"], prob_rn_baixo, alfa_imc);
-            prob_rn_moderado = no_intermediario.calcula_ProbCond(resultado_imc["RNM_IMCO"], prob_rn_moderado, alfa_imc);
-            prob_rn_elevado  = no_intermediario.calcula_ProbCond(resultado_imc["RNE_IMCO"], prob_rn_elevado, alfa_imc);
+            prob_rn_baixo    = no_intermediario.calcula_ProbCond(resultado.imc["RNB_IMCO"], prob_rn_baixo, alfa_imc);
+            prob_rn_moderado = no_intermediario.calcula_ProbCond(resultado.imc["RNM_IMCO"], prob_rn_moderado, alfa_imc);
+            prob_rn_elevado  = no_intermediario.calcula_ProbCond(resultado.imc["RNE_IMCO"], prob_rn_elevado, alfa_imc);
         }
 
-        if( raca_r == "B"){
+        if (raca_r == "B") {
             if(sexo_r == "M"){
                 valor_percentil90 = ca.Calcular_percentil90_masc_branco(idade_r);
             } else if(sexo_r == "F"){
                 valor_percentil90 = ca.Calcular_percentil90_fem_branco(idade_r);
             }
 
-        }else if( raca_r == "N"){
+        } else if (raca_r == "N") {
             if(sexo_r == "M"){
                 valor_percentil90 = ca.Calcular_percentil90_masc_negro(idade_r);
             } else if(sexo_r == "F"){
@@ -161,58 +161,55 @@ $(function(){
         }
 
         //Instancia o nó CA da rede bayesiana
-        evidencia_ca = ca.Instanciar_ca(ca, valor_percentil90);
+        evidencia_ca = ca.calcular_evidencia_ca(ca_valor, valor_percentil90);
 
-        // começar daqui semana que vem...
-        /// sugar man .... you are the answer that make my questions disappear...
-        // ¬¬/~~~~~~
+        if (evidencia_ca == "Adequada") {
 
-        if(evidencia_ca == "Adequada"){
+            delta_ca = no_intermediario.calcula_Delta_Risco_Nut(resultado.ca["RNB_CAAd"], resultado.ca["RNM_CAAd"], resultado.ca["RNE_CAAd"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
+            alfa_ca = no_intermediario.calcula_Alfa(delta_ca);
 
-            oNoInter->calcula_Delta_Risco_Nut(delta_ca, resultado_ca["RNB_CAAd"], resultado_ca["RNM_CAAd"], resultado_ca["RNE_CAAd"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
-            oNoInter->calcula_Alfa(alfa_ca, delta_ca);
+            prob_rn_baixo    = no_intermediario.calcula_ProbCond(resultado.ca["RNB_CAAd"], prob_rn_baixo, alfa_ca);
+            prob_rn_moderado = no_intermediario.calcula_ProbCond(resultado.ca["RNM_CAAd"], prob_rn_moderado, alfa_ca);
+            prob_rn_elevado  = no_intermediario.calcula_ProbCond(resultado.ca["RNE_CAAd"], prob_rn_elevado, alfa_ca);
 
-            oNoInter->calcula_ProbCond(prob_rn_baixo, resultado_ca["RNB_CAAd"], prob_rn_baixo, alfa_ca);
-            oNoInter->calcula_ProbCond(prob_rn_moderado, resultado_ca["RNM_CAAd"], prob_rn_moderado, alfa_ca);
-            oNoInter->calcula_ProbCond(prob_rn_elevado, resultado_ca["RNE_CAAd"], prob_rn_elevado, alfa_ca);
+        } else if (evidencia_ca == "Alterada") {
 
-        }else if(evidencia_ca == "Alterada"){
-            oNoInter->calcula_Delta_Risco_Nut(delta_ca, resultado_ca["RNB_CAAl"], resultado_ca["RNM_CAAl"], resultado_ca["RNE_CAAl"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
-            oNoInter->calcula_Alfa(alfa_ca, delta_ca);
+            delta_ca = no_intermediario.calcula_Delta_Risco_Nut(resultado.ca["RNB_CAAl"], resultado.ca["RNM_CAAl"], resultado.ca["RNE_CAAl"], prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
+            alfa_ca = no_intermediario.calcula_Alfa(delta_ca);
 
-            oNoInter->calcula_ProbCond(prob_rn_baixo, resultado_ca["RNB_CAAl"], prob_rn_baixo, alfa_ca);
-            oNoInter->calcula_ProbCond(prob_rn_moderado, resultado_ca["RNM_CAAl"], prob_rn_moderado, alfa_ca);
-            oNoInter->calcula_ProbCond(prob_rn_elevado, resultado_ca["RNE_CAAl"], prob_rn_elevado, alfa_ca);
+            prob_rn_baixo    = no_intermediario.calcula_ProbCond(resultado.ca["RNB_CAAl"], prob_rn_baixo, alfa_ca);
+            prob_rn_moderado = no_intermediario.calcula_ProbCond(resultado.ca["RNM_CAAl"], prob_rn_moderado, alfa_ca);
+            prob_rn_elevado  = no_intermediario.calcula_ProbCond(resultado.ca["RNE_CAAl"], prob_rn_elevado, alfa_ca);
         }
 
         //CALCULA PROBABILIDADE CONDICIONAL ESTADO NUTRICIONAL
-        oNoInter->calcula_ProbCond_RN_EN(prob_cond_rn_baixo_en, resultado_rn["ENBP_RNB"], resultado_rn["ENPN_RNB"], resultado_rn["ENSP_RNB"], resultado_rn["ENO_RNB"], prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
-        oNoInter->calcula_ProbCond_RN_EN(prob_cond_rn_moderado_en, resultado_rn["ENBP_RNM"], resultado_rn["ENPN_RNM"], resultado_rn["ENSP_RNM"], resultado_rn["ENO_RNM"], prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
-        oNoInter->calcula_ProbCond_RN_EN(prob_cond_rn_elevado_en, resultado_rn["ENBP_RNE"], resultado_rn["ENPN_RNE"], resultado_rn["ENSP_RNE"], resultado_rn["ENO_RNE"], prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
+        prob_cond_rn_baixo_en    = no_intermediario.calcula_ProbCond_RN_EN(resultado.rn["ENBP_RNB"], resultado.rn["ENPN_RNB"], resultado.rn["ENSP_RNB"], resultado.rn["ENO_RNB"], prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
+        prob_cond_rn_moderado_en = no_intermediario.calcula_ProbCond_RN_EN(resultado.rn["ENBP_RNM"], resultado.rn["ENPN_RNM"], resultado.rn["ENSP_RNM"], resultado.rn["ENO_RNM"], prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
+        prob_cond_rn_elevado_en  = no_intermediario.calcula_ProbCond_RN_EN(resultado.rn["ENBP_RNE"], resultado.rn["ENPN_RNE"], resultado.rn["ENSP_RNE"], resultado.rn["ENO_RNE"], prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
 
-        oNoInter->calcula_ProbCond_EN(prob_cond_baixoPeso_rn_baixo, resultado_rn["ENBP_RNB"],prob_ini_en_bp,prob_cond_rn_baixo_en);
-        oNoInter->calcula_ProbCond_EN(prob_cond_pesoNormal_rn_baixo, resultado_rn["ENPN_RNB"],prob_ini_en_pn,prob_cond_rn_baixo_en);
-        oNoInter->calcula_ProbCond_EN(prob_cond_sobrepeso_rn_baixo, resultado_rn["ENSP_RNB"],prob_ini_en_sp,prob_cond_rn_baixo_en);
-        oNoInter->calcula_ProbCond_EN(prob_cond_obesidade_rn_baixo, resultado_rn["ENO_RNB"],prob_ini_en_o,prob_cond_rn_baixo_en);
+        prob_cond_baixoPeso_rn_baixo  = no_intermediario.calcula_ProbCond_EN(resultado.rn["ENBP_RNB"], prob_ini_en_bp, prob_cond_rn_baixo_en);
+        prob_cond_pesoNormal_rn_baixo = no_intermediario.calcula_ProbCond_EN(resultado.rn["ENPN_RNB"], prob_ini_en_pn, prob_cond_rn_baixo_en);
+        prob_cond_sobrepeso_rn_baixo  = no_intermediario.calcula_ProbCond_EN(resultado.rn["ENSP_RNB"], prob_ini_en_sp, prob_cond_rn_baixo_en);
+        prob_cond_obesidade_rn_baixo  = no_intermediario.calcula_ProbCond_EN(resultado.rn["ENO_RNB"],  prob_ini_en_o,  prob_cond_rn_baixo_en);
 
-        oNoInter->calcula_ProbCond_EN(prob_cond_baixoPeso_rn_moderado, resultado_rn["ENBP_RNM"],prob_ini_en_bp,prob_cond_rn_moderado_en);
-        oNoInter->calcula_ProbCond_EN(prob_cond_pesoNormal_rn_moderado, resultado_rn["ENPN_RNM"],prob_ini_en_pn,prob_cond_rn_moderado_en);
-        oNoInter->calcula_ProbCond_EN(prob_cond_sobrepeso_rn_moderado, resultado_rn["ENSP_RNM"],prob_ini_en_sp,prob_cond_rn_moderado_en);
-        oNoInter->calcula_ProbCond_EN(prob_cond_obesidade_rn_moderado, resultado_rn["ENO_RNM"],prob_ini_en_o,prob_cond_rn_moderado_en);
+        prob_cond_baixoPeso_rn_moderado  = no_intermediario.calcula_ProbCond_EN(resultado.rn["ENBP_RNM"], prob_ini_en_bp, prob_cond_rn_moderado_en);
+        prob_cond_pesoNormal_rn_moderado = no_intermediario.calcula_ProbCond_EN(resultado.rn["ENPN_RNM"], prob_ini_en_pn, prob_cond_rn_moderado_en);
+        prob_cond_sobrepeso_rn_moderado  = no_intermediario.calcula_ProbCond_EN(resultado.rn["ENSP_RNM"], prob_ini_en_sp, prob_cond_rn_moderado_en);
+        prob_cond_obesidade_rn_moderado  = no_intermediario.calcula_ProbCond_EN(resultado.rn["ENO_RNM"],  prob_ini_en_o, prob_cond_rn_moderado_en);
 
-        oNoInter->calcula_ProbCond_EN(prob_cond_baixoPeso_rn_elevado, resultado_rn["ENBP_RNE"],prob_ini_en_bp,prob_cond_rn_elevado_en);
-        oNoInter->calcula_ProbCond_EN(prob_cond_pesoNormal_rn_elevado, resultado_rn["ENPN_RNE"],prob_ini_en_pn,prob_cond_rn_elevado_en);
-        oNoInter->calcula_ProbCond_EN(prob_cond_sobrepeso_rn_elevado, resultado_rn["ENSP_RNE"],prob_ini_en_sp,prob_cond_rn_elevado_en);
-        oNoInter->calcula_ProbCond_EN(prob_cond_obesidade_rn_elevado, resultado_rn["ENO_RNE"],prob_ini_en_o,prob_cond_rn_elevado_en);
+        prob_cond_baixoPeso_rn_elevado  = no_intermediario.calcula_ProbCond_EN(resultado.rn["ENBP_RNE"], prob_ini_en_bp, prob_cond_rn_elevado_en);
+        prob_cond_pesoNormal_rn_elevado = no_intermediario.calcula_ProbCond_EN(resultado.rn["ENPN_RNE"], prob_ini_en_pn, prob_cond_rn_elevado_en);
+        prob_cond_sobrepeso_rn_elevado  = no_intermediario.calcula_ProbCond_EN(resultado.rn["ENSP_RNE"], prob_ini_en_sp, prob_cond_rn_elevado_en);
+        prob_cond_obesidade_rn_elevado  = no_intermediario.calcula_ProbCond_EN(resultado.rn["ENO_RNE"],  prob_ini_en_o,  prob_cond_rn_elevado_en);
 
         //CALCULA PROBABILIDADE FINAL ESTADO NUTRICIONAL
-        oNoInter->calcula_ProbFinal_EN_RN(prob_final_baixoPeso, prob_cond_baixoPeso_rn_baixo,prob_cond_baixoPeso_rn_moderado,prob_cond_baixoPeso_rn_elevado,prob_rn_baixo,prob_rn_moderado,prob_rn_elevado);
-        oNoInter->calcula_ProbFinal_EN_RN(prob_final_pesoNormal, prob_cond_pesoNormal_rn_baixo,prob_cond_pesoNormal_rn_moderado,prob_cond_pesoNormal_rn_elevado,prob_rn_baixo,prob_rn_moderado,prob_rn_elevado);
-        oNoInter->calcula_ProbFinal_EN_RN(prob_final_sobrepeso, prob_cond_sobrepeso_rn_baixo,prob_cond_sobrepeso_rn_moderado,prob_cond_sobrepeso_rn_elevado,prob_rn_baixo,prob_rn_moderado,prob_rn_elevado);
-        oNoInter->calcula_ProbFinal_EN_RN(prob_final_obesidade, prob_cond_obesidade_rn_baixo,prob_cond_obesidade_rn_moderado,prob_cond_obesidade_rn_elevado,prob_rn_baixo,prob_rn_moderado,prob_rn_elevado);
+        prob_final_baixoPeso  = no_intermediario.calcula_ProbFinal_EN_RN(prob_cond_baixoPeso_rn_baixo,  prob_cond_baixoPeso_rn_moderado,prob_cond_baixoPeso_rn_elevado,   prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
+        prob_final_pesoNormal = no_intermediario.calcula_ProbFinal_EN_RN(prob_cond_pesoNormal_rn_baixo, prob_cond_pesoNormal_rn_moderado,prob_cond_pesoNormal_rn_elevado, prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
+        prob_final_sobrepeso  = no_intermediario.calcula_ProbFinal_EN_RN(prob_cond_sobrepeso_rn_baixo,  prob_cond_sobrepeso_rn_moderado,prob_cond_sobrepeso_rn_elevado,   prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
+        prob_final_obesidade  = no_intermediario.calcula_ProbFinal_EN_RN(prob_cond_obesidade_rn_baixo,  prob_cond_obesidade_rn_moderado,prob_cond_obesidade_rn_elevado,   prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
 
-        oInferir->calculaProbInicialRiscoDoencaCronica(prob_rdc_a, resultado_rdc["ENBP_RDCA"], resultado_rdc["ENPN_RDCA"], resultado_rdc["ENSP_RDCA"], resultado_rdc["ENO_RDCA"], prob_final_baixoPeso, prob_final_pesoNormal, prob_final_sobrepeso, prob_final_obesidade);
-        oInferir->calculaProbInicialRiscoDoencaCronica(prob_rdc_p, resultado_rdc["ENBP_RDCP"], resultado_rdc["ENPN_RDCP"], resultado_rdc["ENSP_RDCP"], resultado_rdc["ENO_RDCP"], prob_final_baixoPeso, prob_final_pesoNormal, prob_final_sobrepeso, prob_final_obesidade);
+        prob_rdc_a = oInferir.calculaProbInicialRiscoDoencaCronica(resultado.rdc["ENBP_RDCA"], resultado.rdc["ENPN_RDCA"], resultado.rdc["ENSP_RDCA"], resultado.rdc["ENO_RDCA"], prob_final_baixoPeso, prob_final_pesoNormal, prob_final_sobrepeso, prob_final_obesidade);
+        prob_rdc_p = oInferir.calculaProbInicialRiscoDoencaCronica(resultado.rdc["ENBP_RDCP"], resultado.rdc["ENPN_RDCP"], resultado.rdc["ENSP_RDCP"], resultado.rdc["ENO_RDCP"], prob_final_baixoPeso, prob_final_pesoNormal, prob_final_sobrepeso, prob_final_obesidade);
 
     });
 });

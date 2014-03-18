@@ -54,11 +54,11 @@ $(function() {
             return number_format(valor_percentil, "2",".","");
         }
 
-        function Instanciar_ca(ca, percentil90){
+        function calcular_evidencia_ca(ca_valor, percentil90){
             //Instancia o nó CA da rede bayesiana
             evidencia = "Não Informado";
 
-            if(ca > 0 && percentil90 > 0){
+            if (ca_valor > 0 && percentil90 > 0){
                 if(ca >= percentil90){
                     evidencia = "Alterada";
                 }else if(ca < percentil90){
