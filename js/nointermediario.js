@@ -1,102 +1,95 @@
-$(function() {
+function NoIntermediario() {
 
-        function NoIntermediario() {
+ //   this.calcula_Delta_Risco_Nut = calcula_Delta_Risco_Nut;
+    function calcula_Delta_Risco_Nut(valor1, valor2, valor3, valor4, valor5, valor6) {
 
-            this.nome = "";
-            this.categorias = [];
+        delta                = 0;
+        prob_cond1           = valor1;
+        prob_cond2           = valor2;
+        prob_cond3           = valor3;
+        prob_intermediaria1 = valor4;
+        prob_intermediaria2 = valor5;
+        prob_intermediaria3 = valor6;
 
-            this.calcula_Delta_Risco_Nut = calcula_Delta_Risco_Nut;
-            function calcula_Delta_Risco_Nut(valor1, valor2, valor3, valor4, valor5, valor6) {
+        return ((prob_cond1*prob_intermediaria1)+(prob_cond2*prob_intermediaria2)+(prob_cond3*prob_intermediaria3));
+    }
 
-                delta                = 0;
-                prob_cond1           = valor1;
-                prob_cond2           = valor2;
-                prob_cond3           = valor3;
-                prob_intermediaria1 = valor4;
-                prob_intermediaria2 = valor5;
-                prob_intermediaria3 = valor6;
+    function calcula_Alfa(delta) {
+        return (1/delta);
+    }
 
-                return ((prob_cond1*prob_intermediaria1)+(prob_cond2*prob_intermediaria2)+(prob_cond3*prob_intermediaria3));
-            }
+    function calcula_ProbCond(valor1, valor2, valor3) {
+        prob_cond1 = valor1;
+        prob_cond2 = valor2;
+        alfa       = valor3;
 
-            function calcula_Alfa(delta) {
-                return (1/delta);
-            }
+        return ((prob_cond1*prob_cond2)*alfa);
+    }
 
-            function calcula_ProbCond(valor1, valor2, valor3) {
-                prob_cond1 = valor1;
-                prob_cond2 = valor2;
-                alfa       = valor3;
+    function calcula_ProbCond_RN_EN(valor1, valor2, valor3, valor4, valor5, valor6, valor7, valor8) {
+        prob_cond1     = valor1;
+        prob_cond2     = valor2;
+        prob_cond3     = valor3;
+        prob_cond4     = valor4;
 
-                return ((prob_cond1*prob_cond2)*alfa);
-            }
+        prob_entropia1 = valor5;
+        prob_entropia2 = valor6;
+        prob_entropia3 = valor7;
+        prob_entropia4 = valor8;
 
-            function calcula_ProbCond_RN_EN(valor1, valor2, valor3, valor4, valor5, valor6, valor7, valor8) {
-                prob_cond1     = valor1;
-                prob_cond2     = valor2;
-                prob_cond3     = valor3;
-                prob_cond4     = valor4;
+        return ((prob_cond1*prob_entropia1)+(prob_cond2*prob_entropia2)+(prob_cond3*prob_entropia3)+(prob_cond4*prob_entropia4));
+    }
 
-                prob_entropia1 = valor5;
-                prob_entropia2 = valor6;
-                prob_entropia3 = valor7;
-                prob_entropia4 = valor8;
+    function calcula_ProbCond_EN(valor1, valor2, valor3) {
+        prob_cond1    = valor1;
+        prob_entropia = valor2;
+        prob_cond_en  = valor3;
 
-                return ((prob_cond1*prob_entropia1)+(prob_cond2*prob_entropia2)+(prob_cond3*prob_entropia3)+(prob_cond4*prob_entropia4));
-            }
+        return ((prob_cond1*prob_entropia)/prob_cond_en);
+    }
 
-            function calcula_ProbCond_EN(valor1, valor2, valor3) {
-                prob_cond1    = valor1;
-                prob_entropia = valor2;
-                prob_cond_en  = valor3;
+    function calcula_ProbFinal_EN_RN(valor1, valor2, valor3, valor4, valor5, valor6) {
+        prob_cond_en1    = valor1;
+        prob_cond_en2    = valor2;
+        prob_cond_en3    = valor3;
+        prob_cond_geral1 = valor4;
+        prob_cond_geral2 = valor5;
+        prob_cond_geral3 = valor6;
 
-                return ((prob_cond1*prob_entropia)/prob_cond_en);
-            }
+        prob_final = ((prob_cond_en1*prob_cond_geral1)+(prob_cond_en2*prob_cond_geral2)+(prob_cond_en3*prob_cond_geral3));
+        return bcdiv(prob_final,1,4);
+    }
 
-            function calcula_ProbFinal_EN_RN(valor1, valor2, valor3, valor4, valor5, valor6) {
-                prob_cond_en1    = valor1;
-                prob_cond_en2    = valor2;
-                prob_cond_en3    = valor3;
-                prob_cond_geral1 = valor4;
-                prob_cond_geral2 = valor5;
-                prob_cond_geral3 = valor6;
+    function calcula_Delta_Risco_Doencas_Cronicas(valor1, valor2, valor3, valor4) {
+        prob_cond1          = valor1;
+        prob_cond2          = valor2;
+        prob_intermediaria1 = valor3;
+        prob_intermediaria2 = valor4;
 
-                prob_final = ((prob_cond_en1*prob_cond_geral1)+(prob_cond_en2*prob_cond_geral2)+(prob_cond_en3*prob_cond_geral3));
-                return bcdiv(prob_final,1,4);
-            }
+        return ((prob_cond1*prob_intermediaria1)+(prob_cond2*prob_intermediaria2));
+    }
 
-            function calcula_Delta_Risco_Doencas_Cronicas(valor1, valor2, valor3, valor4) {
-                prob_cond1          = valor1;
-                prob_cond2          = valor2;
-                prob_intermediaria1 = valor3;
-                prob_intermediaria2 = valor4;
+    function calcula_ProbCond_EN_RN_RDC(valor1, valor2, valor3, valor4, valor5, valor6, valor7, valor8) {
+        prob_cond1    = valor1;
+        prob_cond2    = valor2;
+        prob_cond3    = valor3;
+        prob_cond4    = valor4;
 
-                return ((prob_cond1*prob_intermediaria1)+(prob_cond2*prob_intermediaria2));
-            }
+        prob_cond_en1 = valor5;
+        prob_cond_en2 = valor6;
+        prob_cond_en3 = valor7;
+        prob_cond_en4 = valor8;
 
-            function calcula_ProbCond_EN_RN_RDC(valor1, valor2, valor3, valor4, valor5, valor6, valor7, valor8) {
-                prob_cond1    = valor1;
-                prob_cond2    = valor2;
-                prob_cond3    = valor3;
-                prob_cond4    = valor4;
+        return ((prob_cond1*prob_cond_en1)+(prob_cond2*prob_cond_en2)+(prob_cond3*prob_cond_en3)+(prob_cond4*prob_cond_en4));
+    }
 
-                prob_cond_en1 = valor5;
-                prob_cond_en2 = valor6;
-                prob_cond_en3 = valor7;
-                prob_cond_en4 = valor8;
+    function calcula_ProbFinal_EN_RN_RDC(valor1, valor2, valor3, valor4) {
+        prob_cond_rn1    = valor1;
+        prob_cond_rn2    = valor2;
+        prob_cond_geral1 = valor3;
+        prob_cond_geral2 = valor4;
 
-                return ((prob_cond1*prob_cond_en1)+(prob_cond2*prob_cond_en2)+(prob_cond3*prob_cond_en3)+(prob_cond4*prob_cond_en4));
-            }
-
-            function calcula_ProbFinal_EN_RN_RDC(valor1, valor2, valor3, valor4) {
-                prob_cond_rn1    = valor1;
-                prob_cond_rn2    = valor2;
-                prob_cond_geral1 = valor3;
-                prob_cond_geral2 = valor4;
-
-                prob_final = ((prob_cond_rn1*prob_cond_geral1)+(prob_cond_rn2*prob_cond_geral2));
-                return bcdiv(prob_final,1,4);
-            }
-        }
-
-});
+        prob_final = ((prob_cond_rn1*prob_cond_geral1)+(prob_cond_rn2*prob_cond_geral2));
+        return bcdiv(prob_final,1,4);
+    }
+}

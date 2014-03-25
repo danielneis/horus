@@ -4,7 +4,7 @@ label {
 
 ul.nav li a,
 ul.nav img {
-    height: 8em;
+    font-size: 120%;
 }
 
 .footer {
@@ -15,5 +15,5 @@ ul.nav img {
 
 .footer .span6 {
     padding-top: .4em;
-    font-size: 1.5em;
+    font-size: 110%;
 }

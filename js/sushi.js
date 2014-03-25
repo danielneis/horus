@@ -19,18 +19,21 @@ $(function(){
 
     $('#run').click(function(evnt) {
 
-        var sexo = $("").val();
-        var idade = $("").val();
-        var peso = $("").val();
-        var altura = $("").val();
-        var ca = $("").val();
-        var ca_valor = $("").val();
-        var raca = $("").val();
-        var pa  = $("").val();
-        var pa_sist = $("").val();
-        var pa_diast = $("").val();
-        var afo_r = $("").val();
-        var afs_r = $("").val();
+        var input = {
+            sexo     : $("").val(),
+            idade    : $("#idade").val(),
+            peso     : $("#peso").val(),
+            altura   : $("#altura").val(),
+            ca       : $("").val(),
+            ca_valor : $("").val(),
+            raca     : $("input[name=sexo_e_raca]:checked").val(),
+            pa       : $("").val(),
+            pa_sist  : $("").val(),
+            pa_diast : $("").val(),
+            afo_r    : $("").val(),
+            afs_r    : $("").val()
+        };
+
 
         // equivalente as chamadas aos metodos "Consultar"
         var resultado = [];
@@ -40,13 +43,11 @@ $(function(){
 
         resultado.en = [ENBP = 0.05, ENPN = 0.7, ENSP = 0.19, ENO =  0.06  ]
 
-        imc = new Imc();
         resultado.imc =  [ RNB_IMCBP = 0.3, RNB_IMCPN = 0.64, RNB_IMCSP = 0.05, RNB_IMCO  = 0.01,
                            RNM_IMCBP = 0.35, RNM_IMCPN = 0.03, RNM_IMCSP = 0.5, RNM_IMCO  = 0.12,
                            RNE_IMCBP = 0.01, RNE_IMCPN = 0.04, RNE_IMCSP = 0.15, RNE_IMCO  = 0.8];
 
 
-        ca = new Ca();
         resultado.ca = [ RNB_CAAd = 0.98, RNB_CAAl = 0.02, RNM_CAAd = 0.1,
                          RNM_CAAl = 0.9, RNE_CAAd = 0.05, RNE_CAAl = 0.95];
 
@@ -60,8 +61,10 @@ $(function(){
 
         resultado.pa =  ''; // classe com metodos
 
-        var inferencia = new Inferencia();
-        var no_intermediario = new NoIntermediario();
+        imc = new Imc();
+        ca = new Ca();
+        inferencia = new Inferencia();
+        no_intermediario = NoIntermediario();
 
         //Define probabilidades iniciais do Nó Estado Nutricional
         prob_ini_en_bp = resultado.en.ENBP;
@@ -84,7 +87,7 @@ $(function(){
         prob_rdc_a = inferencia.calculaProbInicialRiscoDoencaCronica(resultado.rdc["ENBP_RDCA"], resultado.rdc["ENPN_RDCA"], resultado.rdc["ENSP_RDCA"], resultado.rdc["ENO_RDCA"], prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
         prob_rdc_p = inferencia.calculaProbInicialRiscoDoencaCronica(resultado.rdc["ENBP_RDCP"], resultado.rdc["ENPN_RDCP"], resultado.rdc["ENSP_RDCP"], resultado.rdc["ENO_RDCP"], prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
 
-        prob_ini_afs_s = inferencia.calculaProbInicialAtivFisicaSemanal(resultado.afs["RDCA_AFSS"], resultado.afs["RDCP_AFSS"], prob_rdc_a, prob_dc_p);
+        prob_ini_afs_s = inferencia.calculaProbInicialAtivFisicaSemanal(resultado.afs["RDCA_AFSS"], resultado.afs["RDCP_AFSS"], prob_rdc_a, prob_rdc_p);
         prob_ini_afs_i = inferencia.calculaProbInicialAtivFisicaSemanal(resultado.afs["RDCA_AFSI"], resultado.afs["RDCP_AFSI"], prob_rdc_a, prob_rdc_p);
         prob_ini_afs_a = inferencia.calculaProbInicialAtivFisicaSemanal(resultado.afs["RDCA_AFSA"], resultado.afs["RDCP_AFSA"], prob_rdc_a, prob_rdc_p);
 
@@ -95,7 +98,7 @@ $(function(){
         prob_ini_pa_n = inferencia.calculaProbInicialPA(resultado.pa["RDCA_PAN"], resultado.pa["RDCP_PAN"], prob_rdc_a, prob_rdc_p);
         prob_ini_pa_a = inferencia.calculaProbInicialPA(resultado.pa["RDCA_PAA"], resultado.pa["RDCP_PAA"], prob_rdc_a, prob_rdc_p);
 
-        var valor_imc = imc.Calcular_imc(peso_r, altura_r);
+        var valor_imc = imc.Calcular_imc(input.peso, input.altura);
 
         if (sexo_r == "F") {
             valor_percentil5 = imc.Calcular_percentil5_fem(idade_r);
