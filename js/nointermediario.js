@@ -1,14 +1,9 @@
 function NoIntermediario() {
 
-    this.calcula_Delta_Risco_Nut = function(valor1, valor2, valor3, valor4, valor5, valor6) {
+    this.calcula_Delta_Risco_Nut = function(prob_cond1, prob_cond2, prob_cond3,
+                                            prob_intermediaria1, prob_intermediaria2, prob_intermediaria3) {
 
-        delta                = 0;
-        prob_cond1           = valor1;
-        prob_cond2           = valor2;
-        prob_cond3           = valor3;
-        prob_intermediaria1 = valor4;
-        prob_intermediaria2 = valor5;
-        prob_intermediaria3 = valor6;
+        var delta = 0;
 
         return ((prob_cond1*prob_intermediaria1)+(prob_cond2*prob_intermediaria2)+(prob_cond3*prob_intermediaria3));
     }
@@ -39,11 +34,7 @@ function NoIntermediario() {
         return ((prob_cond1*prob_entropia1)+(prob_cond2*prob_entropia2)+(prob_cond3*prob_entropia3)+(prob_cond4*prob_entropia4));
     }
 
-    this.calcula_ProbCond_EN = function(valor1, valor2, valor3) {
-        prob_cond1    = valor1;
-        prob_entropia = valor2;
-        prob_cond_en  = valor3;
-
+    this.calcula_ProbCond_EN = function(prob_cond1, prob_entropia, prob_cond_en) {
         return ((prob_cond1*prob_entropia)/prob_cond_en);
     }
 
