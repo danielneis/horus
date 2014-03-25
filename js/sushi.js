@@ -20,18 +20,17 @@ $(function(){
     $('#run').click(function(evnt) {
 
         var input = {
-            sexo     : $("").val(),
+            sexo     : $("#sexo").val(),
             idade    : $("#idade").val(),
             peso     : $("#peso").val(),
             altura   : $("#altura").val(),
-            ca       : $("").val(),
-            ca_valor : $("").val(),
             raca     : $("input[name=sexo_e_raca]:checked").val(),
             pa       : $("").val(),
             pa_sist  : $("").val(),
             pa_diast : $("").val(),
             afo_r    : $("").val(),
-            afs_r    : $("").val()
+            afs_r    : $("").val(),
+            circunferencia_abdominal: $("#circunferencia_abdominal").val()
         };
 
 
@@ -64,7 +63,7 @@ $(function(){
         imc = new Imc();
         ca = new Ca();
         inferencia = new Inferencia();
-        no_intermediario = NoIntermediario();
+        no_intermediario = new NoIntermediario();
 
         //Define probabilidades iniciais do Nó Estado Nutricional
         prob_ini_en_bp = resultado.en.ENBP;
@@ -100,15 +99,16 @@ $(function(){
 
         var valor_imc = imc.Calcular_imc(input.peso, input.altura);
 
-        if (sexo_r == "F") {
-            valor_percentil5 = imc.Calcular_percentil5_fem(idade_r);
-            valor_percentil85 = imc.Calcular_percentil85_fem(idade_r);
-            valor_percentil95 = imc.Calcular_percentil95_fem(idade_r);
+        if (input.sexo == "F") {
 
-        } else if( sexo_r == "M") {
-            valor_percentil5 = imc.Calcular_percentil5_masc(idade_r);
-            valor_percentil85 = imc.Calcular_percentil85_masc(idade_r);
-            valor_percentil95 = imc.Calcular_percentil95_masc(idade_r);
+            var valor_percentil5 = imc.Calcular_percentil5_fem(idade_r);
+            var valor_percentil85 = imc.Calcular_percentil85_fem(idade_r);
+            var valor_percentil95 = imc.Calcular_percentil95_fem(idade_r);
+
+        } else if (input.sexo == "M") {
+            var valor_percentil5 = imc.Calcular_percentil5_masc(idade_r);
+            var valor_percentil85 = imc.Calcular_percentil85_masc(idade_r);
+            var valor_percentil95 = imc.Calcular_percentil95_masc(idade_r);
         }
 
         evidencia_imc = imc.calcular_evidencia_imc(valor_imc, valor_percentil5, valor_percentil85, valor_percentil95);
@@ -150,23 +150,23 @@ $(function(){
             prob_rn_elevado  = no_intermediario.calcula_ProbCond(resultado.imc["RNE_IMCO"], prob_rn_elevado, alfa_imc);
         }
 
-        if (raca_r == "B") {
-            if(sexo_r == "M"){
-                valor_percentil90 = ca.Calcular_percentil90_masc_branco(idade_r);
-            } else if(sexo_r == "F"){
-                valor_percentil90 = ca.Calcular_percentil90_fem_branco(idade_r);
+        if (input.raca == "B") {
+            if (input.sexo == "M") {
+                var valor_percentil90 = ca.Calcular_percentil90_masc_branco(idade_r);
+            } else if (sexo_r == "F") {
+                var valor_percentil90 = ca.Calcular_percentil90_fem_branco(idade_r);
             }
 
-        } else if (raca_r == "N") {
-            if(sexo_r == "M"){
-                valor_percentil90 = ca.Calcular_percentil90_masc_negro(idade_r);
-            } else if(sexo_r == "F"){
-                valor_percentil90 = ca.Calcular_percentil90_fem_negro(idade_r);
+        } else if (input.raca == "N") {
+            if (input.sexo == "M"){
+                var valor_percentil90 = ca.Calcular_percentil90_masc_negro(idade_r);
+            } else if (input.sexo == "F"){
+                var valor_percentil90 = ca.Calcular_percentil90_fem_negro(idade_r);
             }
         }
 
         //Instancia o nó CA da rede bayesiana
-        evidencia_ca = ca.calcular_evidencia_ca(ca_valor, valor_percentil90);
+        evidencia_ca = ca.calcular_evidencia_ca(circunferencia_abdominal, valor_percentil90);
 
         if (evidencia_ca == "Adequada") {
 
