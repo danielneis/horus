@@ -25,9 +25,8 @@ $(function(){
             peso     : $("#peso").val(),
             altura   : $("#altura").val(),
             raca     : $("input[name=raca]:checked").val(),
-            pa       : $("").val(),
-            pa_sist  : $("").val(),
-            pa_diast : $("").val(),
+            pa_sist  : $("#pressao_sistolica").val(),
+            pa_diast : $("#pressao_diastolica").val(),
             afo_r    : $("").val(),
             afs_r    : $("").val(),
             circunferencia_abdominal: $("#circunferencia_abdominal").val()
@@ -54,16 +53,19 @@ $(function(){
                            ENPN_RDCP = 0.05, ENSP_RDCA = 0.25,
                            ENSP_RDCP = 0.75, ENO_RDCA = 0.1, ENO_RDCP = 0.9];
 
-        resultado.afs = ''; // classe com metodos
+        resultado.afs = [ RDCA_AFSI = 0.02, RDCA_AFSPA = 0.18, RDCA_AFSA = 0.8,
+                          RDCP_AFSI = 0.6, RDCP_AFSPA = 0.36,  RDCP_AFSA = 0.04 ];
 
-        resultado.afo = ''; // classe com metodos
+        resultado.afo = [RDCA_AFOPM = 0.23, RDCA_AFOA = 0.02, RDCA_AFON =0.75,
+                         RDCP_AFOPM = 0.21, RDCP_AFOA = 0.75, RDCP_AFON =0.04];
 
-        resultado.pa =  ''; // classe com metodos
+        resultado.pa =  [RDCA_PAN = 0.99, RDCA_PAA = 0.01, RDCP_PAN = 0.85, RDCP_PAA = 0.15];
 
         var imc = new Imc();
         var ca = new Ca();
         var inferencia = new Inferencia();
         var no_intermediario = new NoIntermediario();
+        var pa = new Pa();
 
         //Define probabilidades iniciais do Nó Estado Nutricional
         var prob_ini_en_bp = resultado.en.ENBP;
@@ -118,7 +120,6 @@ $(function(){
         var evidencia_imc = imc.calcular_evidencia_imc(valor_imc, valor_percentil5, valor_percentil85, valor_percentil95);
         var delta_imc = 0;
         var alfa_imc = 0;
-
 
         if (evidencia_imc == "Abaixo do Peso"){
 
@@ -201,6 +202,81 @@ $(function(){
             prob_rn_moderado = no_intermediario.calcula_ProbCond(resultado.ca["RNM_CAAl"], prob_rn_moderado, alfa_ca);
             prob_rn_elevado  = no_intermediario.calcula_ProbCond(resultado.ca["RNE_CAAl"], prob_rn_elevado, alfa_ca);
         }
+
+	var str_sexo = pa.Definir_sexo(input.sexo);
+
+        if(input.sexo == "M"){
+            percentil5_alt  = pa.Calcular_percentil5_masc_altura(input.idade);
+            percentil10_alt = pa.Calcular_percentil10_masc_altura(input.idade);
+            percentil25_alt = pa.Calcular_percentil25_masc_altura(input.idade);
+            percentil50_alt = pa.Calcular_percentil50_masc_altura(input.idade);
+            percentil75_alt = pa.Calcular_percentil75_masc_altura(input.idade);
+            percentil90_alt = pa.Calcular_percentil90_masc_altura(input.idade);
+
+        } else if(input.sexo == "F"){
+            percentil5_alt  = pa.Calcular_percentil5_fem_altura(input.idade);
+            percentil10_alt = pa.Calcular_percentil10_fem_altura(input.idade);
+            percentil25_alt = pa.Calcular_percentil25_fem_altura(input.idade);
+            percentil50_alt = pa.Calcular_percentil50_fem_altura(input.idade);
+            percentil75_alt = pa.Calcular_percentil75_fem_altura(input.idade);
+            percentil90_alt = pa.Calcular_percentil90_fem_altura(input.idade);
+        }
+
+        //Estabelecer em qual percentil a altura se encontra	 
+        var evidencia_altura = pa.estabelecer_altura(input.altura, percentil5_alt, percentil10_alt, percentil25_alt, percentil50_alt, percentil75_alt, percentil90_alt);
+        var pa_sist = 0;
+        var pa_diast = 0;
+
+        if(input.sexo == "M"){
+            if(evidencia_altura == 5){
+                pa_sist  = pa.Calcular_percentil5_masc_sistolica(input.idade);
+                pa_diast = pa.Calcular_percentil5_masc_diastolica(input.idade);
+            }else if(evidencia_altura == 10){
+                pa_sist  = pa.Calcular_percentil10_masc_sistolica(input.idade);
+                pa_diast = pa.Calcular_percentil10_masc_diastolica(input.idade);
+            } else if(evidencia_altura == 25){
+                pa_sist  = pa.Calcular_percentil25_masc_sistolica(input.idade);
+                pa_diast = pa.Calcular_percentil25_masc_diastolica(input.idade);
+            } else if(evidencia_altura == 50){
+                pa_sist  = pa.Calcular_percentil50_masc_sistolica(input.idade);
+                pa_diast = pa.Calcular_percentil50_masc_diastolica(input.idade);
+            } else if(evidencia_altura == 75){
+                pa_sist  = pa.Calcular_percentil75_masc_sistolica(input.idade);
+                pa_diast = pa.Calcular_percentil75_masc_diastolica(input.idade);
+            } else if(evidencia_altura == 90){
+                pa_sist  = pa.Calcular_percentil90_masc_sistolica(input.idade);
+                pa_diast = pa.Calcular_percentil90_masc_diastolica(input.idade);
+            } else if(evidencia_altura == 95){
+                pa_sist  = pa.Calcular_percentil95_masc_sistolica(input.idade);
+                pa_diast = pa.Calcular_percentil95_masc_diastolica(input.idade);
+            }
+        } else if(input.sexo == "F"){
+            if(evidencia_altura == 5){
+                pa_sist  = pa.Calcular_percentil5_fem_sistolica(input.idade);
+                pa_diast = pa.Calcular_percentil5_fem_diastolica(input.idade);
+            }else if(evidencia_altura == 10){
+                pa_sist  = pa.Calcular_percentil10_fem_sistolica(input.idade);
+                pa_diast = pa.Calcular_percentil10_fem_diastolica(input.idade);
+            } else if(evidencia_altura == 25){
+                pa_sist  = pa.Calcular_percentil25_fem_sistolica(input.idade);
+                pa_diast = pa.Calcular_percentil25_fem_diastolica(input.idade);
+            } else if(evidencia_altura == 50){
+                pa_sist  = pa.Calcular_percentil50_fem_sistolica(input.idade);
+                pa_diast = pa.Calcular_percentil50_fem_diastolica(input.idade);
+            } else if(evidencia_altura == 75){
+                pa_sist  = pa.Calcular_percentil75_fem_sistolica(input.idade);
+                pa_diast = pa.Calcular_percentil75_fem_diastolica(input.idade);
+            } else if(evidencia_altura == 90){
+                pa_sist  = pa.Calcular_percentil90_fem_sistolica(input.idade);
+                pa_diast = pa.Calcular_percentil90_fem_diastolica(input.idade);
+            } else if(evidencia_altura == 95){
+                pa_sist  = pa.Calcular_percentil95_fem_sistolica(input.idade);
+                pa_diast = pa.Calcular_percentil95_fem_diastolica(input.idade);
+            }
+        }
+
+        var evidencia_pa = pa.calcular_evidencia(pa_sist ,pa_diast ,input.pa_sist, input.pa_diast);
+        $("#resultado_pa").text(evidencia_pa);
 
         //CALCULA PROBABILIDADE CONDICIONAL ESTADO NUTRICIONAL
         var prob_cond_rn_baixo_en    = no_intermediario.calcula_ProbCond_RN_EN(resultado.rn["ENBP_RNB"], resultado.rn["ENPN_RNB"], resultado.rn["ENSP_RNB"], resultado.rn["ENO_RNB"], prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
