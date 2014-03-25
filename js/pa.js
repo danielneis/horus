@@ -239,7 +239,6 @@ function Pa() {
 
     this.calcular_evidencia = function(pa_sist ,pa_diast ,pa_sist_usuario, pa_diast_usuario){
         evidencia = "Não Informado";
-        console.log(pa_sist ,pa_diast ,pa_sist_usuario, pa_diast_usuario);
 
         if(pa_sist > 0 && pa_diast > 0 && pa_sist_usuario > 0 && pa_diast_usuario > 0){
 

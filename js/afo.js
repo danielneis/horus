@@ -1,6 +1,6 @@
 function Afo(){
 
-    this.Instanciar_afo = function(instancia){
+    this.calcular_evidencia = function(instancia) {
         //Instancia o nó AFO da rede bayesiana
         evidencia = "Não Informado";
 
@@ -14,6 +14,5 @@ function Afo(){
             }
         }
         return evidencia;
-
     }
 }

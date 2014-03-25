@@ -20,15 +20,15 @@ $(function(){
     $('#run').click(function(evnt) {
 
         var input = {
-            sexo     : $("input[name=sexo]:checked").val(),
-            idade    : $("#idade").val(),
-            peso     : $("#peso").val(),
-            altura   : $("#altura").val(),
-            raca     : $("input[name=raca]:checked").val(),
-            pa_sist  : $("#pressao_sistolica").val(),
-            pa_diast : $("#pressao_diastolica").val(),
-            afo_r    : $("").val(),
-            afs_r    : $("").val(),
+            sexo      : $("input[name=sexo]:checked").val(),
+            idade     : $("#idade").val(),
+            peso      : $("#peso").val(),
+            altura    : $("#altura").val(),
+            raca      : $("input[name=raca]:checked").val(),
+            pa_sist   : $("#pressao_sistolica").val(),
+            pa_diast  : $("#pressao_diastolica").val(),
+            obesidade : $("input[name=obesidade]:checked").val(),
+            afs_r     : $("").val(),
             circunferencia_abdominal: $("#circunferencia_abdominal").val()
         };
 
@@ -66,6 +66,7 @@ $(function(){
         var inferencia = new Inferencia();
         var no_intermediario = new NoIntermediario();
         var pa = new Pa();
+        var afo = new Afo();
 
         //Define probabilidades iniciais do Nó Estado Nutricional
         var prob_ini_en_bp = resultado.en.ENBP;
@@ -277,6 +278,10 @@ $(function(){
 
         var evidencia_pa = pa.calcular_evidencia(pa_sist ,pa_diast ,input.pa_sist, input.pa_diast);
         $("#resultado_pa").text(evidencia_pa);
+
+        var evidencia_afo = afo.calcular_evidencia(input.obesidade);
+        $("#resultado_afo").text(evidencia_afo);
+
 
         //CALCULA PROBABILIDADE CONDICIONAL ESTADO NUTRICIONAL
         var prob_cond_rn_baixo_en    = no_intermediario.calcula_ProbCond_RN_EN(resultado.rn["ENBP_RNB"], resultado.rn["ENPN_RNB"], resultado.rn["ENSP_RNB"], resultado.rn["ENO_RNB"], prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
