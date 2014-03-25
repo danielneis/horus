@@ -19,34 +19,34 @@ function Imc() {
 
     }
 
-    this.Calcular_imc = function(peso, altura){
+    this.Calcular_imc = function(peso, altura) {
 
-        valor_imc = (peso/ (Math.pow(altura,2)/10000));
+        valor_imc = peso / Math.pow(altura,2);
 
-        return Number(2).toFixed(2);
+        return Number(valor_imc).toFixed(2);
 
     }
 
     this.Calcular_percentil5_fem = function(idade) {
 
-        valor_percentil = 11.009555 + (0.229939 * idade) + (0.014901 * pow(idade,2)) - (0.000542 * pow(idade,3));
+        valor_percentil = 11.009555 + (0.229939 * idade) + (0.014901 * Math.pow(idade,2)) - (0.000542 * Math.pow(idade,3));
 
-        return number_format(valor_percentil, "2",".","");
+        return Number(valor_percentil).toFixed(2);
     }
 
     this.Calcular_percentil85_fem = function(idade) {
 
-        valor_percentil = 9.336828 + (1.084724 * idade) + (0.014508 * pow(idade,2)) - (0.001354 * pow(idade,3));
+        valor_percentil = 9.336828 + (1.084724 * idade) + (0.014508 * Math.pow(idade,2)) - (0.001354 * Math.pow(idade,3));
 
-        return number_format(valor_percentil, "2",".","");
+        return Number(valor_percentil).toFixed(2);
 
     }
 
     this.Calcular_percentil95_fem = function(idade) {
 
-        valor_percentil = 5.340034 + (2.269024 * idade) - (0.044547 * pow(idade,2)) - (0.000236 * pow(idade,3)); 
+        valor_percentil = 5.340034 + (2.269024 * idade) - (0.044547 * Math.pow(idade,2)) - (0.000236 * Math.pow(idade,3)); 
 
-        return number_format(valor_percentil, "2",".","");
+        return Number(valor_percentil).toFixed(2);
 
     }
 
@@ -54,23 +54,23 @@ function Imc() {
 
         valor_percentil = (1 / (0.086407 - 0.001677 * idade));
 
-        return number_format(valor_percentil, "2",".","");
+        return Number(valor_percentil).toFixed(2);
 
     }
 
     this.Calcular_percentil85_masc = function(idade) {
 
-        valor_percentil = 14.936461 - (0.067946 * idade) + (0.072673 * pow(idade,2)) - (0.001965 * pow(idade,3));
+        valor_percentil = 14.936461 - (0.067946 * idade) + (0.072673 * Math.pow(idade,2)) - (0.001965 * Math.pow(idade,3));
 
-        return number_format(valor_percentil, "2",".","");
+        return Number(valor_percentil).toFixed(2);
 
     }
 
     this.Calcular_percentil95_masc = function(idade){
 
-        valor_percentil = 10.998531 + (1.092658 * idade) + (0.018761 * pow(idade,2)) - (0.00145 * pow(idade,3));
+        valor_percentil = 10.998531 + (1.092658 * idade) + (0.018761 * Math.pow(idade,2)) - (0.00145 * Math.pow(idade,3));
 
-        return number_format(valor_percentil, "2",".","");
+        return Number(valor_percentil).toFixed(2);
 
     }
 
@@ -98,5 +98,6 @@ function Imc() {
 
             }
         }  
+        return evidencia;
     }
 }

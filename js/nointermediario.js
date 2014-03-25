@@ -55,8 +55,7 @@ function NoIntermediario() {
         prob_cond_geral2 = valor5;
         prob_cond_geral3 = valor6;
 
-        prob_final = ((prob_cond_en1*prob_cond_geral1)+(prob_cond_en2*prob_cond_geral2)+(prob_cond_en3*prob_cond_geral3));
-        return bcdiv(prob_final,1,4);
+        return ((prob_cond_en1*prob_cond_geral1)+(prob_cond_en2*prob_cond_geral2)+(prob_cond_en3*prob_cond_geral3));
     }
 
     this.calcula_Delta_Risco_Doencas_Cronicas = function(valor1, valor2, valor3, valor4) {
@@ -88,7 +87,6 @@ function NoIntermediario() {
         prob_cond_geral1 = valor3;
         prob_cond_geral2 = valor4;
 
-        prob_final = ((prob_cond_rn1*prob_cond_geral1)+(prob_cond_rn2*prob_cond_geral2));
-        return bcdiv(prob_final,1,4);
+        return ((prob_cond_rn1*prob_cond_geral1)+(prob_cond_rn2*prob_cond_geral2));
     }
 }
