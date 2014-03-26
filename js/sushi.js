@@ -27,7 +27,12 @@ $(function(){
             pa_sist   : $("#pressao_sistolica").val(),
             pa_diast  : $("#pressao_diastolica").val(),
             obesidade : $("input[name=obesidade]:checked").val(),
-            afs_r     : $("").val(),
+            freq_esp_livre    : $("#esportesLivresFreq").val(),
+            freq_esp_coletivo : $("#esportesColFreq").val(),
+            freq_esp_academia : $("#esportesAcadFreq").val(),
+            dur_esp_livre     : $("#esportesLivresMinDiarios").val(),
+            dur_esp_coletivo  : $("#esportesColMinDiarios").val(),
+            dur_esp_academia  : $("#esportesAcadMinDiarios").val(),
             circunferencia_abdominal: $("#circunferencia_abdominal").val()
         };
 
@@ -66,6 +71,7 @@ $(function(){
         var no_intermediario = new NoIntermediario();
         var pa = new Pa();
         var afo = new Afo();
+        var afs = new Afs();
 
         //Define probabilidades iniciais do Nó Estado Nutricional
         var prob_ini_en_bp = resultado.en.ENBP;
@@ -205,14 +211,7 @@ $(function(){
 
 	var str_sexo = pa.Definir_sexo(input.sexo);
 
-        var percentil5_alt  = 0;
-        var percentil10_alt = 0;
-        var percentil25_alt = 0;
-        var percentil50_alt = 0;
-        var percentil75_alt = 0;
-        var percentil90_alt = 0;
-
-        if(input.sexo == "M"){
+        if (input.sexo == "M"){
             percentil5_alt  = pa.Calcular_percentil5_masc_altura(input.idade);
             percentil10_alt = pa.Calcular_percentil10_masc_altura(input.idade);
             percentil25_alt = pa.Calcular_percentil25_masc_altura(input.idade);
@@ -287,6 +286,13 @@ $(function(){
 
         var evidencia_afo = afo.calcular_evidencia(input.obesidade);
         $("#resultado_afo").text(evidencia_afo);
+
+        var tmafd = afs.calcular_tmafd(input.freq_esp_livre, input.freq_esp_coletivo, input.freq_esp_academia,
+                                       input.dur_esp_livre, input.dur_esp_coletivo, input.dur_esp_academia);
+        var evidencia_afs = afs.calcular_evidencia(tmafd);
+
+        $("#resultado_tmafd").text(tmafd + " minutos");
+        $("#resultado_afs").text(evidencia_afs);
 
         //CALCULA PROBABILIDADE CONDICIONAL ESTADO NUTRICIONAL
         var prob_cond_rn_baixo_en    = no_intermediario.calcula_ProbCond_RN_EN(resultado.rn.ENBP_RNB, resultado.rn.ENPN_RNB, resultado.rn.ENSP_RNB, resultado.rn.ENO_RNB, prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
