@@ -36,7 +36,6 @@ $(function(){
             circunferencia_abdominal: $("#circunferencia_abdominal").val()
         };
 
-
         // equivalente as chamadas aos metodos "Consultar"
         var resultado = {
             rn : { ENBP_RNB : 0.45,  ENBP_RNM :  0.5, ENBP_RNE :  0.05, ENPN_RNB :  0.99, ENPN_RNM :  0.007,
@@ -105,6 +104,8 @@ $(function(){
         var prob_ini_pa_n = inferencia.calculaProbInicialPA(resultado.pa.RDCA_PAN, resultado.pa.RDCP_PAN, prob_rdc_a, prob_rdc_p);
         var prob_ini_pa_a = inferencia.calculaProbInicialPA(resultado.pa.RDCA_PAA, resultado.pa.RDCP_PAA, prob_rdc_a, prob_rdc_p);
 
+        /*******************FINAL DOS CÁLCULOS PARA ATRIBUIÇÃO DAS PROBABILDIADES INICIAIS DA REDE*************************/
+
         var valor_imc = imc.Calcular_imc(input.peso, input.altura);
 
         var valor_percentil5 = 0;
@@ -112,13 +113,11 @@ $(function(){
         var valor_percentil95 = 0;
 
         if (input.sexo == "F") {
-
-            valor_percentil5 = imc.Calcular_percentil5_fem(input.idade);
+            valor_percentil5  = imc.Calcular_percentil5_fem(input.idade);
             valor_percentil85 = imc.Calcular_percentil85_fem(input.idade);
             valor_percentil95 = imc.Calcular_percentil95_fem(input.idade);
-
         } else if (input.sexo == "M") {
-            valor_percentil5 = imc.Calcular_percentil5_masc(input.idade);
+            valor_percentil5  = imc.Calcular_percentil5_masc(input.idade);
             valor_percentil85 = imc.Calcular_percentil85_masc(input.idade);
             valor_percentil95 = imc.Calcular_percentil95_masc(input.idade);
         }
@@ -166,6 +165,7 @@ $(function(){
         
         $("#resultado_imc").text(evidencia_imc);
 
+    //REALIZA OS CÁLCULOS DE CIRCUNFERÊNCIA ABDOMINAL
         var valor_percentil90 = 0;
 
         if (input.raca == "B") {
@@ -190,6 +190,7 @@ $(function(){
 
         $("#resultado_ca").text(evidencia_ca);
 
+    //CALCULA AS PROBABILIDADES CONDICIONAIS DE INDICADORES ANTROPOMÉTRICOS A PARTIR DA EVIDÊNCIA CIRCUNFERÊNCIA ABDOMINAL
         if (evidencia_ca == "Adequada") {
 
             delta_ca = no_intermediario.calcula_Delta_Risco_Nut(resultado.ca.RNB_CAAd, resultado.ca.RNM_CAAd, resultado.ca.RNE_CAAd, prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
@@ -209,7 +210,71 @@ $(function(){
             prob_rn_elevado  = no_intermediario.calcula_ProbCond(resultado.ca.RNE_CAAl, prob_rn_elevado, alfa_ca);
         }
 
-	var str_sexo = pa.Definir_sexo(input.sexo);
+        //CALCULA PROBABILIDADE CONDICIONAL ESTADO NUTRICIONAL
+        var prob_cond_rn_baixo_en    = no_intermediario.calcula_ProbCond_RN_EN(resultado.rn.ENBP_RNB, resultado.rn.ENPN_RNB, resultado.rn.ENSP_RNB, resultado.rn.ENO_RNB, prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
+        var prob_cond_rn_moderado_en = no_intermediario.calcula_ProbCond_RN_EN(resultado.rn.ENBP_RNM, resultado.rn.ENPN_RNM, resultado.rn.ENSP_RNM, resultado.rn.ENO_RNM, prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
+        var prob_cond_rn_elevado_en  = no_intermediario.calcula_ProbCond_RN_EN(resultado.rn.ENBP_RNE, resultado.rn.ENPN_RNE, resultado.rn.ENSP_RNE, resultado.rn.ENO_RNE, prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
+
+        var prob_cond_baixoPeso_rn_baixo  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENBP_RNB, prob_ini_en_bp, prob_cond_rn_baixo_en);
+        var prob_cond_pesoNormal_rn_baixo = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENPN_RNB, prob_ini_en_pn, prob_cond_rn_baixo_en);
+        var prob_cond_sobrepeso_rn_baixo  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENSP_RNB, prob_ini_en_sp, prob_cond_rn_baixo_en);
+        var prob_cond_obesidade_rn_baixo  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENO_RNB,  prob_ini_en_o,  prob_cond_rn_baixo_en);
+
+        var prob_cond_baixoPeso_rn_moderado  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENBP_RNM, prob_ini_en_bp, prob_cond_rn_moderado_en);
+        var prob_cond_pesoNormal_rn_moderado = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENPN_RNM, prob_ini_en_pn, prob_cond_rn_moderado_en);
+        var prob_cond_sobrepeso_rn_moderado  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENSP_RNM, prob_ini_en_sp, prob_cond_rn_moderado_en);
+        var prob_cond_obesidade_rn_moderado  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENO_RNM,  prob_ini_en_o, prob_cond_rn_moderado_en);
+
+        var prob_cond_baixoPeso_rn_elevado  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENBP_RNE, prob_ini_en_bp, prob_cond_rn_elevado_en);
+        var prob_cond_pesoNormal_rn_elevado = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENPN_RNE, prob_ini_en_pn, prob_cond_rn_elevado_en);
+        var prob_cond_sobrepeso_rn_elevado  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENSP_RNE, prob_ini_en_sp, prob_cond_rn_elevado_en);
+        var prob_cond_obesidade_rn_elevado  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENO_RNE,  prob_ini_en_o,  prob_cond_rn_elevado_en);
+
+        //CALCULA PROBABILIDADE FINAL ESTADO NUTRICIONAL
+        var prob_final_baixoPeso  = no_intermediario.calcula_ProbFinal_EN_RN(prob_cond_baixoPeso_rn_baixo,  prob_cond_baixoPeso_rn_moderado,prob_cond_baixoPeso_rn_elevado,   prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
+        var prob_final_pesoNormal = no_intermediario.calcula_ProbFinal_EN_RN(prob_cond_pesoNormal_rn_baixo, prob_cond_pesoNormal_rn_moderado,prob_cond_pesoNormal_rn_elevado, prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
+        var prob_final_sobrepeso  = no_intermediario.calcula_ProbFinal_EN_RN(prob_cond_sobrepeso_rn_baixo,  prob_cond_sobrepeso_rn_moderado,prob_cond_sobrepeso_rn_elevado,   prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
+        var prob_final_obesidade  = no_intermediario.calcula_ProbFinal_EN_RN(prob_cond_obesidade_rn_baixo,  prob_cond_obesidade_rn_moderado,prob_cond_obesidade_rn_elevado,   prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
+
+        $("#resultado_baixo_peso").text(Number(prob_final_baixoPeso*100).toFixed(1) + "%");
+        $("#resultado_peso_normal").text(Number(prob_final_pesoNormal*100).toFixed(1) + "%");
+        $("#resultado_sobrepeso").text(Number(prob_final_sobrepeso*100).toFixed(1) + "%");
+        $("#resultado_obesidade").text(Number(prob_final_obesidade*100).toFixed(1) + "%");
+
+        var prob_rdc_a = inferencia.calculaProbInicialRiscoDoencaCronica(resultado.rdc.ENBP_RDCA, resultado.rdc.ENPN_RDCA, resultado.rdc.ENSP_RDCA, resultado.rdc.ENO_RDCA, prob_final_baixoPeso, prob_final_pesoNormal, prob_final_sobrepeso, prob_final_obesidade);
+        var prob_rdc_p = inferencia.calculaProbInicialRiscoDoencaCronica(resultado.rdc.ENBP_RDCP, resultado.rdc.ENPN_RDCP, resultado.rdc.ENSP_RDCP, resultado.rdc.ENO_RDCP, prob_final_baixoPeso, prob_final_pesoNormal, prob_final_sobrepeso, prob_final_obesidade);
+
+        /******* TÉRMINO DA ANÁLISE DAS CATEGORIAS SELECIONADAS PARA RISCO NUTRICIONAL ******/
+
+        /******* INÍCIO DA ANÁLISE DAS CATEGORIAS SELECIONADAS PARA RISCO DE DOENÇAS CRÔNICAS *****/
+
+        var evidencia_afo = afo.calcular_evidencia(input.obesidade);
+        $("#resultado_afo").text(evidencia_afo);
+
+        //CALCULA AS PROBABILIDADES CONDICIONAIS DE RISCO DE DOENÇAS CRÔNICAS A PARTIR DA EVIDÊNCIA ASCENDENCIA FAMILIAR DE OBESIDADE
+        if(evidencia_afo == "Pai ou Mãe"){
+            no_intermediario.calcula_Delta_Risco_Doencas_Cronicas(delta_afo, resultado_afo.RDCA_AFOPM, resultado_afo.RDCP_AFOPM, prob_rdc_a, prob_rdc_p);
+            no_intermediario.calcula_Alfa(alfa_afo, delta_afo);
+
+            no_intermediario.calcula_ProbCond(prob_rdc_a, resultado_afo.RDCA_AFOPM, prob_rdc_a, alfa_afo);
+            no_intermediario.calcula_ProbCond(prob_rdc_p, resultado_afo.RDCP_AFOPM, prob_rdc_p, alfa_afo);
+
+        }else if(evidencia_afo == "Ambos"){
+
+            no_intermediario.calcula_Delta_Risco_Doencas_Cronicas(delta_afo, resultado_afo.RDCA_AFOA, resultado_afo.RDCP_AFOA, prob_rdc_a, prob_rdc_p);
+            no_intermediario.calcula_Alfa(alfa_afo, delta_afo);
+
+            no_intermediario.calcula_ProbCond(prob_rdc_a, resultado_afo.RDCA_AFOA, prob_rdc_a, alfa_afo);
+            no_intermediario.calcula_ProbCond(prob_rdc_p, resultado_afo.RDCP_AFOA, prob_rdc_p, alfa_afo);
+
+        }else if(evidencia_afo == "Nenhum"){
+
+            no_intermediario.calcula_Delta_Risco_Doencas_Cronicas(delta_afo, resultado_afo.RDCA_AFON, resultado_afo.RDCP_AFON, prob_rdc_a, prob_rdc_p);
+            no_intermediario.calcula_Alfa(alfa_afo, delta_afo);
+
+            no_intermediario.calcula_ProbCond(prob_rdc_a, resultado_afo.RDCA_AFON, prob_rdc_a, alfa_afo);
+            no_intermediario.calcula_ProbCond(prob_rdc_p, resultado_afo.RDCP_AFON, prob_rdc_p, alfa_afo);
+        }
 
         if (input.sexo == "M"){
             percentil5_alt  = pa.Calcular_percentil5_masc_altura(input.idade);
@@ -228,7 +293,7 @@ $(function(){
             percentil90_alt = pa.Calcular_percentil90_fem_altura(input.idade);
         }
 
-        //Estabelecer em qual percentil a altura se encontra	 
+        //Estabelecer em qual percentil a altura se encontra     
         var evidencia_altura = pa.estabelecer_altura(input.altura, percentil5_alt, percentil10_alt, percentil25_alt, percentil50_alt, percentil75_alt, percentil90_alt);
         var pa_sist = 0;
         var pa_diast = 0;
@@ -284,8 +349,24 @@ $(function(){
         var evidencia_pa = pa.calcular_evidencia(pa_sist ,pa_diast ,input.pa_sist, input.pa_diast);
         $("#resultado_pa").text(evidencia_pa);
 
-        var evidencia_afo = afo.calcular_evidencia(input.obesidade);
-        $("#resultado_afo").text(evidencia_afo);
+        //CALCULA AS PROBABILIDADES CONDICIONAIS DE RISCO CARDIOVASCULAR A PARTIR DA EVIDÊNCIA PRESSÃO ARTERIAL
+        if(evidencia_pa == "Normal"){
+            no_intermediario.calcula_Delta_Risco_Doencas_Cronicas(delta_pa, resultado_pa.RDCA_PAN, resultado_pa.RDCP_PAN, prob_rdc_a, prob_rdc_p);
+            no_intermediario.calcula_Alfa(alfa_pa, delta_pa);
+
+            no_intermediario.calcula_ProbCond(prob_rdc_a, resultado_pa.RDCA_PAN, prob_rdc_a, alfa_pa);
+            no_intermediario.calcula_ProbCond(prob_rdc_p, resultado_pa.RDCP_PAN, prob_rdc_p, alfa_pa);
+
+        }else if(evidencia_pa == "Alterada"){
+
+            no_intermediario.calcula_Delta_Risco_Doencas_Cronicas(delta_pa , resultado_pa.RDCA_PAA, resultado_pa.RDCP_PAA, prob_rdc_a, prob_rdc_p);
+            no_intermediario.calcula_Alfa(alfa_pa, delta_pa);
+
+            no_intermediario.calcula_ProbCond(prob_rdc_a, resultado_pa.RDCA_PAA, prob_rdc_a, alfa_pa);
+            no_intermediario.calcula_ProbCond(prob_rdc_p, resultado_pa.RDCP_PAA, prob_rdc_p, alfa_pa);
+        }
+
+        //Instancia o nó AFS da rede bayesiana
 
         var tmafd = afs.calcular_tmafd(input.freq_esp_livre, input.freq_esp_coletivo, input.freq_esp_academia,
                                        input.dur_esp_livre, input.dur_esp_coletivo, input.dur_esp_academia);
@@ -294,39 +375,73 @@ $(function(){
         $("#resultado_tmafd").text(tmafd + " minutos");
         $("#resultado_afs").text(evidencia_afs);
 
+        //CALCULA AS PROBABILIDADES CONDICIONAIS DE RISCO CARDIOVASCULAR A PARTIR DA EVIDÊNCIA ATIVIDADE FÍSICA SEMANAL
+        if(evidencia_afs == "Adequada"){
+
+            no_intermediario.calcula_Delta_Risco_Doencas_Cronicas(delta_afs, resultado_afs.RDCA_AFSA, resultado_afs.RDCP_AFSA, prob_rdc_a, prob_rdc_p);
+            no_intermediario.calcula_Alfa(alfa_afs, delta_afs);
+
+            no_intermediario.calcula_ProbCond(prob_rdc_a, resultado_afs.RDCA_AFSA, prob_rdc_a, alfa_afs);
+            no_intermediario.calcula_ProbCond(prob_rdc_p, resultado_afs.RDCP_AFSA, prob_rdc_p, alfa_afs);
+
+        }else if(evidencia_afs == "Parcialmente Adequada"){
+
+            no_intermediario.calcula_Delta_Risco_Doencas_Cronicas(delta_afs, resultado_afs.RDCA_AFSPA, resultado_afs.RDCP_AFSPA, prob_rdc_a, prob_rdc_p);
+            no_intermediario.calcula_Alfa(alfa_afs, delta_afs);
+
+            no_intermediario.calcula_ProbCond(prob_rdc_a, resultado_afs.RDCA_AFSPA, prob_rdc_a, alfa_afs);
+            no_intermediario.calcula_ProbCond(prob_rdc_p, resultado_afs.RDCP_AFSPA, prob_rdc_p, alfa_afs);
+
+        }else if(evidencia_afs == "Inadequada"){
+            no_intermediario.calcula_Delta_Risco_Doencas_Cronicas(delta_afs, resultado_afs.RDCA_AFSI, resultado_afs.RDCP_AFSI, prob_rdc_a, prob_rdc_p);
+            no_intermediario.calcula_Alfa(alfa_afs, delta_afs);
+
+            no_intermediario.calcula_ProbCond(prob_rdc_a, resultado_afs.RDCA_AFSI, prob_rdc_a, alfa_afs);
+            no_intermediario.calcula_ProbCond(prob_rdc_p, resultado_afs.RDCP_AFSI, prob_rdc_p, alfa_afs);
+        }
+
+        /********* TÉRMINO DA ANÁLISE DAS CATEGORIAS SELECIONADAS PARA RISCO CARDIOVASCULAR *********/
         //CALCULA PROBABILIDADE CONDICIONAL ESTADO NUTRICIONAL
-        var prob_cond_rn_baixo_en    = no_intermediario.calcula_ProbCond_RN_EN(resultado.rn.ENBP_RNB, resultado.rn.ENPN_RNB, resultado.rn.ENSP_RNB, resultado.rn.ENO_RNB, prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
-        var prob_cond_rn_moderado_en = no_intermediario.calcula_ProbCond_RN_EN(resultado.rn.ENBP_RNM, resultado.rn.ENPN_RNM, resultado.rn.ENSP_RNM, resultado.rn.ENO_RNM, prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
-        var prob_cond_rn_elevado_en  = no_intermediario.calcula_ProbCond_RN_EN(resultado.rn.ENBP_RNE, resultado.rn.ENPN_RNE, resultado.rn.ENSP_RNE, resultado.rn.ENO_RNE, prob_ini_en_bp, prob_ini_en_pn, prob_ini_en_sp, prob_ini_en_o);
+        no_intermediario.calcula_ProbCond_EN_RN_RDC(prob_cond_rdc_ausente_en, resultado_rdc.ENBP_RDCA, resultado_rdc.ENPN_RDCA, resultado_rdc.ENSP_RDCA, resultado_rdc.ENO_RDCA, prob_final_baixoPeso, prob_final_pesoNormal, prob_final_sobrepeso, prob_final_obesidade);
+        no_intermediario.calcula_ProbCond_EN_RN_RDC(prob_cond_rdc_presente_en, resultado_rdc.ENBP_RDCP, resultado_rdc.ENPN_RDCP, resultado_rdc.ENSP_RDCP, resultado_rdc.ENO_RDCP, prob_final_baixoPeso, prob_final_pesoNormal, prob_final_sobrepeso, prob_final_obesidade);
 
-        var prob_cond_baixoPeso_rn_baixo  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENBP_RNB, prob_ini_en_bp, prob_cond_rn_baixo_en);
-        var prob_cond_pesoNormal_rn_baixo = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENPN_RNB, prob_ini_en_pn, prob_cond_rn_baixo_en);
-        var prob_cond_sobrepeso_rn_baixo  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENSP_RNB, prob_ini_en_sp, prob_cond_rn_baixo_en);
-        var prob_cond_obesidade_rn_baixo  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENO_RNB,  prob_ini_en_o,  prob_cond_rn_baixo_en);
+        no_intermediario.calcula_ProbCond_EN(prob_cond_baixoPeso_rdc_ausente, resultado_rdc.ENBP_RDCA,prob_final_baixoPeso,prob_cond_rdc_ausente_en);
+        no_intermediario.calcula_ProbCond_EN(prob_cond_pesoNormal_rdc_ausente, resultado_rdc.ENPN_RDCA,prob_final_pesoNormal,prob_cond_rdc_ausente_en);
+        no_intermediario.calcula_ProbCond_EN(prob_cond_sobrepeso_rdc_ausente, resultado_rdc.ENSP_RDCA,prob_final_sobrepeso,prob_cond_rdc_ausente_en);
+        no_intermediario.calcula_ProbCond_EN(prob_cond_obesidade_rdc_ausente, resultado_rdc.ENO_RDCA,prob_final_obesidade,prob_cond_rdc_ausente_en);
 
-        var prob_cond_baixoPeso_rn_moderado  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENBP_RNM, prob_ini_en_bp, prob_cond_rn_moderado_en);
-        var prob_cond_pesoNormal_rn_moderado = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENPN_RNM, prob_ini_en_pn, prob_cond_rn_moderado_en);
-        var prob_cond_sobrepeso_rn_moderado  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENSP_RNM, prob_ini_en_sp, prob_cond_rn_moderado_en);
-        var prob_cond_obesidade_rn_moderado  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENO_RNM,  prob_ini_en_o, prob_cond_rn_moderado_en);
+        no_intermediario.calcula_ProbCond_EN(prob_cond_baixoPeso_rdc_presente, resultado_rdc.ENBP_RDCP,prob_final_baixoPeso,prob_cond_rdc_presente_en);
+        no_intermediario.calcula_ProbCond_EN(prob_cond_pesoNormal_rdc_presente, resultado_rdc.ENPN_RDCP,prob_final_pesoNormal,prob_cond_rdc_presente_en);
+        no_intermediario.calcula_ProbCond_EN(prob_cond_sobrepeso_rdc_presente, resultado_rdc.ENSP_RDCP,prob_final_sobrepeso,prob_cond_rdc_presente_en);
+        no_intermediario.calcula_ProbCond_EN(prob_cond_obesidade_rdc_presente, resultado_rdc.ENO_RDCP,prob_final_obesidade,prob_cond_rdc_presente_en);
 
-        var prob_cond_baixoPeso_rn_elevado  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENBP_RNE, prob_ini_en_bp, prob_cond_rn_elevado_en);
-        var prob_cond_pesoNormal_rn_elevado = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENPN_RNE, prob_ini_en_pn, prob_cond_rn_elevado_en);
-        var prob_cond_sobrepeso_rn_elevado  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENSP_RNE, prob_ini_en_sp, prob_cond_rn_elevado_en);
-        var prob_cond_obesidade_rn_elevado  = no_intermediario.calcula_ProbCond_EN(resultado.rn.ENO_RNE,  prob_ini_en_o,  prob_cond_rn_elevado_en);
+        //CALCULA PROBABILIDADE FINAL ESTADO NUTRICIONAL 
+        no_intermediario.calcula_ProbFinal_EN_RN_RDC(prob_final_baixoPeso, prob_cond_baixoPeso_rdc_ausente,prob_cond_baixoPeso_rdc_presente,prob_rdc_a,prob_rdc_p);
+        no_intermediario.calcula_ProbFinal_EN_RN_RDC(prob_final_pesoNormal, prob_cond_pesoNormal_rdc_ausente,prob_cond_pesoNormal_rdc_presente,prob_rdc_a,prob_rdc_p);
+        no_intermediario.calcula_ProbFinal_EN_RN_RDC(prob_final_sobrepeso, prob_cond_sobrepeso_rdc_ausente,prob_cond_sobrepeso_rdc_presente,prob_rdc_a,prob_rdc_p);
+        no_intermediario.calcula_ProbFinal_EN_RN_RDC(prob_final_obesidade, prob_cond_obesidade_rdc_ausente,prob_cond_obesidade_rdc_presente,prob_rdc_a,prob_rdc_p);
 
-        //CALCULA PROBABILIDADE FINAL ESTADO NUTRICIONAL
-        var prob_final_baixoPeso  = no_intermediario.calcula_ProbFinal_EN_RN(prob_cond_baixoPeso_rn_baixo,  prob_cond_baixoPeso_rn_moderado,prob_cond_baixoPeso_rn_elevado,   prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
-        var prob_final_pesoNormal = no_intermediario.calcula_ProbFinal_EN_RN(prob_cond_pesoNormal_rn_baixo, prob_cond_pesoNormal_rn_moderado,prob_cond_pesoNormal_rn_elevado, prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
-        var prob_final_sobrepeso  = no_intermediario.calcula_ProbFinal_EN_RN(prob_cond_sobrepeso_rn_baixo,  prob_cond_sobrepeso_rn_moderado,prob_cond_sobrepeso_rn_elevado,   prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
-        var prob_final_obesidade  = no_intermediario.calcula_ProbFinal_EN_RN(prob_cond_obesidade_rn_baixo,  prob_cond_obesidade_rn_moderado,prob_cond_obesidade_rn_elevado,   prob_rn_baixo, prob_rn_moderado, prob_rn_elevado);
+        prob_final_baixoPeso  = number_format(prob_final_baixoPeso*100,2,'.',''); 
+        prob_final_pesoNormal = number_format(prob_final_pesoNormal*100,2,'.','');
+        prob_final_sobrepeso  = number_format(prob_final_sobrepeso*100,2,'.',''); 
+        prob_final_obesidade  = number_format(prob_final_obesidade*100,2,'.','');
 
-        $("#resultado_baixo_peso").text(Number(prob_final_baixoPeso*100).toFixed(1) + "%");
-        $("#resultado_peso_normal").text(Number(prob_final_pesoNormal*100).toFixed(1) + "%");
-        $("#resultado_sobrepeso").text(Number(prob_final_sobrepeso*100).toFixed(1) + "%");
-        $("#resultado_obesidade").text(Number(prob_final_obesidade*100).toFixed(1) + "%");
+        //Define a faixa de idade
+        inferencia.define_idade(idade_c, idade_r);
 
-        var prob_rdc_a = inferencia.calculaProbInicialRiscoDoencaCronica(resultado.rdc.ENBP_RDCA, resultado.rdc.ENPN_RDCA, resultado.rdc.ENSP_RDCA, resultado.rdc.ENO_RDCA, prob_final_baixoPeso, prob_final_pesoNormal, prob_final_sobrepeso, prob_final_obesidade);
-        var prob_rdc_p = inferencia.calculaProbInicialRiscoDoencaCronica(resultado.rdc.ENBP_RDCP, resultado.rdc.ENPN_RDCP, resultado.rdc.ENSP_RDCP, resultado.rdc.ENO_RDCP, prob_final_baixoPeso, prob_final_pesoNormal, prob_final_sobrepeso, prob_final_obesidade);
+        //Define a atividade física semanal
+        inferencia.define_atfs(atfs, evidencia_afs);
 
+        //Define o sexo
+        inferencia.define_sexo(sexo_c, sexo_r);
+
+        //Define qual foi a categoria com maior probabildiade
+        inferencia.define_maior_probabilidade(maior_categoria, prob_final_baixoPeso, prob_final_pesoNormal, prob_final_sobrepeso, prob_final_obesidade, atfs, idade_c, sexo_c);
+
+        //Faz a chamada para calcular o total calórico
+        inferencia.calculaTotalCalorico(total_calorico, maior_categoria);
+
+        //ENVIANDO A RESPOSTA
+        echo "msg&evidencia_imc&evidencia_ca&evidencia_pa&evidencia_afo&evidencia_afs&tempo_medio_afs&prob_final_baixoPeso&prob_final_pesoNormal&prob_final_sobrepeso&prob_final_obesidade&total_calorico";
     });
 });
