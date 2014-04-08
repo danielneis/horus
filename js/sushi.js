@@ -24,16 +24,16 @@ $(function(){
             peso      : parseInt($("#peso").val()),
             altura    : parseInt($("#altura").val())/ 100,
             raca      : $("input[name=raca]:checked").val(),
-            pa_sist   : $("#pressao_sistolica").val(),
-            pa_diast  : $("#pressao_diastolica").val(),
+            pa_sist   : parseInt($("#pressao_sistolica").val()),
+            pa_diast  : parseInt($("#pressao_diastolica").val()),
             obesidade : $("input[name=obesidade]:checked").val(),
-            freq_esp_livre    : $("#esportesLivresFreq").val(),
-            freq_esp_coletivo : $("#esportesColFreq").val(),
-            freq_esp_academia : $("#esportesAcadFreq").val(),
-            dur_esp_livre     : $("#esportesLivresMinDiarios").val(),
-            dur_esp_coletivo  : $("#esportesColMinDiarios").val(),
-            dur_esp_academia  : $("#esportesAcadMinDiarios").val(),
-            circunferencia_abdominal: $("#circunferencia_abdominal").val()
+            freq_esp_livre    : parseInt($("#esportesLivresFreq").val()),
+            freq_esp_coletivo : parseInt($("#esportesColFreq").val()),
+            freq_esp_academia : parseInt($("#esportesAcadFreq").val()),
+            dur_esp_livre     : parseInt($("#esportesLivresMinDiarios").val()),
+            dur_esp_coletivo  : parseInt($("#esportesColMinDiarios").val()),
+            dur_esp_academia  : parseInt($("#esportesAcadMinDiarios").val()),
+            circunferencia_abdominal: parseInt($("#circunferencia_abdominal").val())
         };
 
         // equivalente as chamadas aos metodos "Consultar"
