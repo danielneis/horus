@@ -123,12 +123,12 @@ function Inferencia() {
 
     }
 
-    this.define_sexo = function(sexo_r) {
+    this.define_sexo = function(sexo) {
         sexo_c = 0;
 
-        if(sexo_r == "Masculino"){
+        if (sexo == "M") {
             sexo_c = 1;
-        }else if(sexo_r == "Feminino"){
+        } else if (sexo == "F") {
             sexo_c = 2;
         }
         return sexo_c;
@@ -162,7 +162,10 @@ function Inferencia() {
          */
         retorno = 0;
 
-        if ((prob_final_baixoPeso > prob_final_pesoNormal) && (prob_final_baixoPeso > prob_final_sobrepeso) && (prob_final_baixoPeso > prob_final_obesidade)) {
+        if ((prob_final_baixoPeso > prob_final_pesoNormal) &&
+            (prob_final_baixoPeso > prob_final_sobrepeso) &&
+            (prob_final_baixoPeso > prob_final_obesidade)) {
+
             if(idade_c == 1){
                 if(sexo_c == 1){
                     retorno = 1;
@@ -183,7 +186,9 @@ function Inferencia() {
                 }
             }
 
-        } else if((prob_final_pesoNormal > prob_final_baixoPeso) && (prob_final_pesoNormal > prob_final_sobrepeso) && (prob_final_pesoNormal > prob_final_obesidade)) {
+        } else if ((prob_final_pesoNormal > prob_final_baixoPeso) &&
+                   (prob_final_pesoNormal > prob_final_sobrepeso) &&
+                   (prob_final_pesoNormal > prob_final_obesidade)) {
 
             if(atfs == 3){
                 if(idade_c == 1){
@@ -227,7 +232,10 @@ function Inferencia() {
                 }
             }
 
-        } else if((prob_final_sobrepeso > prob_final_baixoPeso) && (prob_final_sobrepeso > prob_final_pesoNormal) && (prob_final_sobrepeso > prob_final_obesidade)) {
+        } else if((prob_final_sobrepeso > prob_final_baixoPeso) &&
+                  (prob_final_sobrepeso > prob_final_pesoNormal) &&
+                  (prob_final_sobrepeso > prob_final_obesidade)) {
+
             if(atfs == 1){
                 if(idade_c == 1){
                     if(sexo_c == 1){
@@ -290,7 +298,10 @@ function Inferencia() {
                 }
             }
 
-        }else if((prob_final_obesidade > prob_final_baixoPeso) && (prob_final_obesidade > prob_final_pesoNormal) && (prob_final_obesidade > prob_final_sobrepeso)) {
+        }else if ((prob_final_obesidade > prob_final_baixoPeso) &&
+                  (prob_final_obesidade > prob_final_pesoNormal) &&
+                  (prob_final_obesidade > prob_final_sobrepeso)) {
+
             if(idade_c == 3){
                 if(atfs == 1){
                     if(sexo_c == 1){
@@ -325,6 +336,7 @@ function Inferencia() {
                 }
             }
         }
+        return retorno;
 
     }
 

@@ -2,7 +2,6 @@ function Afs() {
 
     // tmafd = tempo médio de atividade física diária
     this.calcular_tmafd = function(freq_esp_livre, freq_esp_coletivo, freq_esp_academia, dur_esp_livre, dur_esp_coletivo, dur_esp_academia) {
-        console.log(freq_esp_livre, freq_esp_coletivo, freq_esp_academia, dur_esp_livre, dur_esp_coletivo, dur_esp_academia);
 
         tmafd = ((freq_esp_livre *  dur_esp_livre) + ( freq_esp_coletivo *  dur_esp_coletivo ) + (  freq_esp_academia * dur_esp_academia )) / 7;
         return Number(tmafd).toFixed(2);
