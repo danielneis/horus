@@ -5,7 +5,6 @@
         <title>SUSHI Saúde</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
         <link href="css/sushi.css" rel="stylesheet" media="screen">
     </head>
     <body data-spy="scroll" data-target="#sidebar">
@@ -15,31 +14,31 @@
                 <div class="col-md-1">
                     <div class="bs-docs-sidebar affix" id="sidebar">
                         <ul id="navbar" class="nav bs-docs-sidenav" data-spy="affix">
-                            <li><a href="#sexo">Sexo</a></li>
-                            <li><a href="#raca">Raca</a></li>
-                            <li><a href="#obesidade">Obesidade em relação aos pais</a></li>
+                            <li class="active"><a href="#section-sexo">Sexo</a></li>
+                            <li><a href="#section-raca">Raca</a></li>
+                            <li><a href="#section-obesidade">Obesidade em relação aos pais</a></li>
                             <li><a href="#section-idade">Idade</a></li>
-                            <li><a href="#medidas">Medidas</a></li>
-                            <li><a href="#doencas">Doenças crônicas</a></li>
+                            <li><a href="#section-medidas">Medidas</a></li>
+                            <li><a href="#section-doencas">Doenças crônicas</a></li>
                             <li>
-                                <a href="#atividadefisica">Atividade física semanal</a>
+                                <a href="#section-atividadefisica">Atividade física semanal</a>
                                 <ul class="nav">
-                                    <li><a href="#at-livre">Esportes livres</a></li>
-                                    <li><a href="#at-coletivo">Esportes coletivos</a></li>
-                                    <li><a href="#at-academia">Esportes em academia</a></li>
+                                    <li><a href="#section-at-livre">Esportes livres</a></li>
+                                    <li><a href="#section-at-coletivo">Esportes coletivos</a></li>
+                                    <li><a href="#section-at-academia">Esportes em academia</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#diagnostico">Diagnóstico</a></li>
-                            <li><a href="#info">Sobre o software</a></li>
+                            <li><a href="#section-diagnostico">Diagnóstico</a></li>
+                            <li><a href="#section-info">Sobre o software</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="col-md-5 col-md-offset-2">
-
-                    <div id="sexo">
-                        <h3>Selecione seu sexo</h3>
+                <div class="col-md-9 col-md-offset-2">
+                    <div id="section-sexo" >
                         <form class="form-horizontal">
+                            <h1>Sexo</h1>
+                            <p>Alguma coisa sobre o sexo... bom, hein</p>
                             <div class="col-sm-offset-2 col-sm-10">
                                 <div class="form-group">
                                     <div class="radio">
@@ -61,9 +60,10 @@
                         </form>
                     </div>
 
-                    <div id="raca">
-                        <h3>Selecione a raça</h3>
+                    <div id="section-raca">
                         <form class="form-horizontal">
+                            <h1>Raça</h1>
+                            <p>Alguma coisa sobre a raça...</p>
                             <div class="col-sm-offset-2 col-sm-10">
                                 <div class="form-group">
                                     <div class="radio">
@@ -85,9 +85,10 @@
                         </form>
                     </div>
 
-                    <div id="obesidade">
-                        <h3>Obesidade em relação aos pais</h3>
+                    <div id="section-obesidade">
                         <form class="form-horizontal">
+                            <h1>Obesidade em relação aos pais</h1>
+                            <p>Alguma coisa sobre a obesidade....</p>
                             <div class="col-sm-offset-2 col-sm-10">
                                 <div class="form-group">
                                     <div class="radio">
@@ -109,10 +110,9 @@
                     </div>
 
                     <div id="section-idade">
-
-                        <h3>Informe sua idade</h3>
-
                         <form class="form-horizontal">
+                            <h1>Idade</h1>
+                            <p>Informe aqui sua idade, em número de anos completos, que deve ser entre 7 e 20 anos.</p>
                             <div class="form-group">
                                 <label for="idade" class="col-sm-3 control-label">Idade</label>
                                 <div class="col-sm-9">
@@ -122,11 +122,10 @@
                         </form>
                     </div>
 
-                    <div id="medidas">
-
-                        <h3>Medidas</h3>
-
+                    <div id="section-medidas">
                         <form class="form-horizontal">
+                            <h1>Medidas</h1>
+                            <p>Informe aqui seu peso, em kilograms, sua altura e circuferência abdominal em centímetros.</p>
                             <div class="form-group">
                                 <label for="peso" class="col-sm-3 control-label">Peso</label>
                                 <div class="col-sm-9">
@@ -149,11 +148,12 @@
 
                     </div>
 
-                    <div id="doencas">
-                        <h3>Risco de Doenças Crônicas</h3>
+                    <div id="section-doencas">
                         <form class="form-horizontal">
+                            <h1>Risco de Doenças Crônicas</h1>
+                            <p>Informe aqui os valores para pressão sistólica e diastólica, em milímetros de mercúrio (mmHg).</p>
                             <div class="form-group">
-                                <label for="pressa_sistolica" class="col-sm-3 control-label">Pressão arterial sistólica</label>
+                                <label for="pressao_sistolica" class="col-sm-3 control-label">Pressão arterial sistólica</label>
                                 <div class="col-sm-9">
                                     <input id="pressao_sistolica"  class="form-control" />
                                 </div>
@@ -167,16 +167,18 @@
                         </form>
                     </div>
 
-                    <div id="atividadefisica">
-                        <h3>Atividade física semanal</h3>
+                    <div id="section-atividadefisica">
+                        <h1>Atividade física semanal</h1>
+                        <p>Informe aqui a frequência semanal e o tempo de cada sessão praticada por você para cada esporte.</p>
 
-                        <h4 id="at-livre">Esportes livres</h4>
-                        <form class="form-horizontal">
+                        <form id="section-at-livre" class="form-horizontal">
+                            <h2>Esportes livres</h2>
+                            <p>Exemplos de esportes livres são: corrida, natação, ciclismo.</p>
                             <div class="form-group">
                                 <label for="esportesLivresFreq" class="col-sm-3 control-label">Frequência</label>
                                 <div class="col-sm-9">
                                     <input type="range" class="form-control" id="esportesLivresFreq" min="0" max="7" step="1" value="0">
-                                    <span id="esportesLivresFreqLabel"></span>
+                                    <span class="range-label" id="esportesLivresFreqLabel">0 dias por semana</span>
                                 </div>
                             </div>
 
@@ -188,13 +190,14 @@
                             </div>
                         </form>
 
-                        <h4 id="at-coletivo">Esportes coletivos</h4>
-                        <form class="form-horizontal">
+                        <form id="section-at-coletivo" class="form-horizontal">
+                            <h4>Esportes coletivos</h4>
+                            <p>Exemplos de esportes coletivos são: futebol, volei, basketball.</p>
                             <div class="form-group">
                                 <label for="esportesColFreq" class="col-sm-3 control-label">Frequência</label>
                                 <div class="col-sm-9">
                                     <input type="range" class="form-control" id="esportesColFreq" min="0" max="7" step="1" value="0">
-                                    <span id="esportesColFreqLabel"></span>
+                                    <span class="range-label" id="esportesColFreqLabel">0 dias por semana</span>
                                 </div>
                             </div>
 
@@ -206,45 +209,55 @@
                             </div>
                         </form>
 
-                        <h4 id="at-academia">Esportes em academia</h4>
-                        <form class="form-horizontal">
+                        <form id="section-at-academia"class="form-horizontal">
+                            <h4>Esportes em academia</h4>
+                            <p>Exemplos de esportes coletivos são: musculação e ginástica.</p>
+                            <p>Exemplos de esportes coletivos são: musculação e ginástica.</p>
                             <div class="form-group">
                                 <label for="esportesColFreq" class="col-sm-3 control-label">Frequência</label>
                                 <div class="col-sm-9">
                                     <input type="range" class="form-control" id="esportesAcadFreq" min="0" max="7" step="1" value="0">
-                                    <span id="esportesAcadFreqLabel"></span>
+                                    <span class="range-label" id="esportesAcadFreqLabel">0 dias por semana</span>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="esportesAcadMinDiarios" class="col-sm-3 control-label">Minutos diários</label>
                                 <div class="col-sm-9">
-                                <input type="number" id="esportesAcadMinDiarios" class="form-control">
+                                    <input type="number" id="esportesAcadMinDiarios" class="form-control">
                                 </div>
                             </div>
                         </form>
                     </div>
 
-                    <div id="diagnostico">
+                    <div id="section-diagnostico">
 
-                        <h3>Diagnóstico do estado nutricional</h3>
+                        <h1>Diagnóstico</h1>
 
-                        <a href="#" id="run" class="button" >Calcular</a>
+                        <button type="button" class="col-md-offset-11 btn btn-primary btn-lg" id="run">Calcular</button>
 
-                        <h4>IMC:<span id="resultado_imc" ></span></h4>
-                        <h4>Circunferência abdominal:<span id="resultado_ca"></span></h4>
-                        <h4>Pressão arterial:<span id="resultado_pa"></span></h4>
-                        <h4>Obesidade em relação aos pais:<span id="resultado_afo"></span></h4>
-                        <h4>Tempo médio atividade física diária:<span id="resultado_tmafd"></span></h4>
-                        <h4>Atividade física semanal:<span id="resultado_afs"></span></h4>
+                        <h2>Estado nutricional</h2>
+                        <div class="col-md-12">
+                            <dl class="dl-horizontal">
+                                <dt>IMC:</dt><dd id="resultado_imc" ></dd>
+                                <dt>Circunferência abdominal:</dt><dd id="resultado_ca"></dd>
+                                <dt>Pressão arterial:</dt><dd id="resultado_pa"></dd>
+                                <dt>Obesidade em relação aos pais:</dt><dd id="resultado_afo"></dd>
+                                <dt>Tempo médio atividade física diária:</dt><dd id="resultado_tmafd"></dd>
+                                <dt>Atividade física semanal:</dt><dd id="resultado_afs"></dd>
+                            </dl>
+                        </div>
 
-                        <h3>Diagnóstico provável</h3>
-
-                        <h4>Baixo peso:<span id="resultado_baixo_peso"></span></h4>
-                        <h4>Peso normal:<span id="resultado_peso_normal"></span></h4>
-                        <h4>Sobrepeso:<span id="resultado_sobrepeso"></span></h4>
-                        <h4>Obesidade:<span id="resultado_obesidade"></span></h4>
-                        <h4>Total Calórico:<span id="resultado_total_calorico"></span></h4>
+                        <h2>Diagnóstico provável</h2>
+                        <div class="col-md-12">
+                            <dl class="dl-horizontal">
+                                <dt>Baixo peso:</dt><dd id="resultado_baixo_peso"></dd>
+                                <dt>Peso normal:</dt><dd id="resultado_peso_normal"></dd>
+                                <dt>Sobrepeso:</dt><dd id="resultado_sobrepeso"></dd>
+                                <dt>Obesidade:</dt><dd id="resultado_obesidade"></dd>
+                                <dt>Total Calórico:</dt><dd id="resultado_total_calorico"></dd>
+                            </dl>
+                        </div>
                     </div>
                 </div>
             </div>

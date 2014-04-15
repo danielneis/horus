@@ -31,5 +31,46 @@
     -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
     -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
     box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
-    border-left: 3px solid purple;
+    border-left: 3px solid #563D7C;
+}
+
+.bs-docs-sidebar .nav .nav > .active > a, .bs-docs-sidebar .nav .nav > .active:hover > a, .bs-docs-sidebar .nav .nav > .active:focus > a {
+    font-weight: 500;
+    padding-left: 28px;
+}
+
+.bs-docs-sidebar .nav .nav > li > a {
+    font-size: 12px;
+    padding-bottom: 1px;
+    padding-top: 1px;
+}
+.bs-docs-sidebar .nav > .active > a, .bs-docs-sidebar .nav > .active:hover > a, .bs-docs-sidebar .nav > .active:focus > a {
+    background-color: rgba(0, 0, 0, 0);
+    border-left: 2px solid #563D7C;
+    color: #563D7C;
+}
+
+.dl-horizontal dt {
+    overflow: visible;
+    white-space: normal;
+    width: 260px;
+}
+
+.dl-horizontal dd {
+    padding-left: 7em;
+}
+
+#section-diagnostico {
+    margin-top: 6em!important;
+}
+
+input[type="range"] {
+        display: inline !important;
+        width: 70%;
+}
+
+.range-label {
+    font-weight: 700;
+    vertical-align: 70%;
+    margin-left: 0.5em;
 }
