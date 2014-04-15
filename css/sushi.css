@@ -74,3 +74,7 @@ input[type="range"] {
     vertical-align: 70%;
     margin-left: 0.5em;
 }
+
+.radio label {
+    font-weight: 700;
+}
