@@ -17,5 +17,5 @@ $(function(){
     });
 
 
-    $('#navbar').affix();
+    $('#navbar').affix({offset: {top: 55}});
 });
