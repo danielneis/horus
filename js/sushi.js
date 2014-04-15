@@ -1,22 +1,8 @@
 $(function(){
 
-    // labels dos sliders
-    $('#esportesLivresFreqLabel').text($('#esportesLivresFreq').val());
-    $("#esportesLivresFreq").on('change', function(evnt) {
-        $("#esportesLivresFreqLabel").text($('#esportesLivresFreq').val());
-    });
-
-    $('#esportesColFreqLabel').text($('#esportesColFreq').val());
-    $("#esportesColFreq").on('change', function(evnt) {
-        $("#esportesColFreqLabel").text($('#esportesColFreq').val());
-    });
-
-    $('#esportesAcadFreqLabel').text($('#esportesAcadFreq').val());
-    $("#esportesAcadFreq").on('change', function(evnt) {
-        $("#esportesAcadFreqLabel").text($('#esportesAcadFreq').val());
-    });
-
     $('#run').click(function(evnt) {
+
+        evnt.preventDefault();
 
         var input = {
             sexo      : $("input[name=sexo]:checked").val(),
@@ -448,8 +434,5 @@ $(function(){
         console.log(total_calorico);
 
         $("#resultado_total_calorico").text(total_calorico);
-
-        //ENVIANDO A RESPOSTA
- //       echo "msg&evidencia_imc&evidencia_ca&evidencia_pa&evidencia_afo&evidencia_afs&tempo_medio_afs&prob_final_baixoPeso&prob_final_pesoNormal&prob_final_sobrepeso&prob_final_obesidade&total_calorico";
     });
 });
