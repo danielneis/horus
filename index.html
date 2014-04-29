@@ -1,262 +1,311 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>SUSHI Saúde</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="css/sushi.css" rel="stylesheet" media="screen">
+        <title>SUSHI Saúde</title>
     </head>
     <body data-spy="scroll" data-target="#sidebar">
         <div class="container">
             <div class="row">
+                <div class="panel-group" id="accordion">
 
-                <div class="col-md-1">
-                    <div class="bs-docs-sidebar affix" id="sidebar">
-                        <ul id="navbar" class="nav bs-docs-sidenav" data-spy="affix">
-                            <li class="active"><a href="#section-sexo">Sexo</a></li>
-                            <li><a href="#section-raca">Raca</a></li>
-                            <li><a href="#section-obesidade">Obesidade em relação aos pais</a></li>
-                            <li><a href="#section-idade">Idade</a></li>
-                            <li><a href="#section-medidas">Medidas</a></li>
-                            <li><a href="#section-doencas">Doenças crônicas</a></li>
-                            <li>
-                                <a href="#section-atividadefisica">Atividade física semanal</a>
-                                <ul class="nav">
-                                    <li><a href="#section-at-livre">Esportes livres</a></li>
-                                    <li><a href="#section-at-coletivo">Esportes coletivos</a></li>
-                                    <li><a href="#section-at-academia">Esportes em academia</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#section-diagnostico">Diagnóstico</a></li>
-                            <li><a href="#section-info">Sobre o software</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-md-9 col-md-offset-2">
-                    <div id="section-sexo" >
-                        <form class="form-horizontal">
-                            <h1>Sexo</h1>
-                            <p>Alguma coisa sobre o sexo... bom, hein</p>
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="form-group">
-                                    <div class="radio">
-                                        <label>
-                                            <input id="masculino" name="sexo" type="radio" value="M">
-                                            Masculino
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="radio">
-                                        <label>
-                                            <input id="feminino" name="sexo" type="radio" value="F" />
-                                            Feminino
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div id="section-raca">
-                        <form class="form-horizontal">
-                            <h1>Raça</h1>
-                            <p>Alguma coisa sobre a raça...</p>
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="form-group">
-                                    <div class="radio">
-                                        <label>
-                                            <input id="branca" name="raca" type="radio" value="B" />
-                                            Branca 
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="radio">
-                                        <label>
-                                            <input id="negra"  name="sexo_e_raca" type="radio" value="N" />
-                                            Negra
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div id="section-obesidade">
-                        <form class="form-horizontal">
-                            <h1>Obesidade em relação aos pais</h1>
-                            <p>Alguma coisa sobre a obesidade....</p>
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="form-group">
-                                    <div class="radio">
-                                        <label><input type="radio" name="obesidade" value="P" >Pai ou mãe</label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="radio">
-                                        <label><input type="radio" name="obesidade" value="A" >Ambos</label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="radio">
-                                        <label><input type="radio" name="obesidade" value="N" >Nenhum</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div id="section-idade">
-                        <form class="form-horizontal">
-                            <h1>Idade</h1>
-                            <p>Informe aqui sua idade, em número de anos completos, que deve ser entre 7 e 20 anos.</p>
-                            <div class="form-group">
-                                <label for="idade" class="col-sm-3 control-label">Idade</label>
-                                <div class="col-sm-9">
-                                    <input id="idade" class="form-control" />
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div id="section-medidas">
-                        <form class="form-horizontal">
-                            <h1>Medidas</h1>
-                            <p>Informe aqui seu peso, em kilograms, sua altura e circuferência abdominal em centímetros.</p>
-                            <div class="form-group">
-                                <label for="peso" class="col-sm-3 control-label">Peso</label>
-                                <div class="col-sm-9">
-                                    <input id="peso" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="altura" class="col-sm-3 control-label">Altura</label>
-                                <div class="col-sm-9">
-                                    <input id="altura" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="circunferencia_abdominal" class="col-sm-3 control-label">Circunferência abdominal</label>
-                                <div class="col-sm-9">
-                                    <input id="circunferencia_abdominal" class="form-control"/>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-
-                    <div id="section-doencas">
-                        <form class="form-horizontal">
-                            <h1>Risco de Doenças Crônicas</h1>
-                            <p>Informe aqui os valores para pressão sistólica e diastólica, em milímetros de mercúrio (mmHg).</p>
-                            <div class="form-group">
-                                <label for="pressao_sistolica" class="col-sm-3 control-label">Pressão arterial sistólica</label>
-                                <div class="col-sm-9">
-                                    <input id="pressao_sistolica"  class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="pressao_diastolica" class="col-sm-3 control-label">Pressão arterial diastólica</label>
-                                <div class="col-sm-9">
-                                    <input id="pressao_diastolica"  class="form-control" />
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div id="section-atividadefisica">
-                        <h1>Atividade física semanal</h1>
-                        <p>Informe aqui a frequência semanal e o tempo de cada sessão praticada por você para cada esporte.</p>
-
-                        <form id="section-at-livre" class="form-horizontal">
-                            <h2>Esportes livres</h2>
-                            <p>Exemplos de esportes livres são: corrida, natação, ciclismo.</p>
-                            <div class="form-group">
-                                <label for="esportesLivresFreq" class="col-sm-3 control-label">Frequência</label>
-                                <div class="col-sm-9">
-                                    <input type="range" class="form-control" id="esportesLivresFreq" min="0" max="7" step="1" value="0">
-                                    <span class="range-label" id="esportesLivresFreqLabel">0 dias por semana</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="esportesLivresMinDiarios" class="col-sm-3 control-label">Minutos diários</label>
-                                <div class="col-sm-9">
-                                    <input type="number" id="esportesLivresMinDiarios" class="form-control" >
-                                </div>
-                            </div>
-                        </form>
-
-                        <form id="section-at-coletivo" class="form-horizontal">
-                            <h4>Esportes coletivos</h4>
-                            <p>Exemplos de esportes coletivos são: futebol, volei, basketball.</p>
-                            <div class="form-group">
-                                <label for="esportesColFreq" class="col-sm-3 control-label">Frequência</label>
-                                <div class="col-sm-9">
-                                    <input type="range" class="form-control" id="esportesColFreq" min="0" max="7" step="1" value="0">
-                                    <span class="range-label" id="esportesColFreqLabel">0 dias por semana</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="esportesLivresMinDiarios" class="col-sm-3 control-label">Minutos diários</label>
-                                <div class="col-sm-9">
-                                    <input type="number" id="esportesColMinDiarios" class="form-control" >
-                                </div>
-                            </div>
-                        </form>
-
-                        <form id="section-at-academia"class="form-horizontal">
-                            <h4>Esportes em academia</h4>
-                            <p>Exemplos de esportes coletivos são: musculação e ginástica.</p>
-                            <p>Exemplos de esportes coletivos são: musculação e ginástica.</p>
-                            <div class="form-group">
-                                <label for="esportesColFreq" class="col-sm-3 control-label">Frequência</label>
-                                <div class="col-sm-9">
-                                    <input type="range" class="form-control" id="esportesAcadFreq" min="0" max="7" step="1" value="0">
-                                    <span class="range-label" id="esportesAcadFreqLabel">0 dias por semana</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="esportesAcadMinDiarios" class="col-sm-3 control-label">Minutos diários</label>
-                                <div class="col-sm-9">
-                                    <input type="number" id="esportesAcadMinDiarios" class="form-control">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div id="section-diagnostico">
-
-                        <h1>Diagnóstico</h1>
-
-                        <button type="button" class="col-md-offset-11 btn btn-primary btn-lg" id="run">Calcular</button>
-
-                        <h2>Estado nutricional</h2>
-                        <div class="col-md-12">
-                            <dl class="dl-horizontal">
-                                <dt>IMC:</dt><dd id="resultado_imc" ></dd>
-                                <dt>Circunferência abdominal:</dt><dd id="resultado_ca"></dd>
-                                <dt>Pressão arterial:</dt><dd id="resultado_pa"></dd>
-                                <dt>Obesidade em relação aos pais:</dt><dd id="resultado_afo"></dd>
-                                <dt>Tempo médio atividade física diária:</dt><dd id="resultado_tmafd"></dd>
-                                <dt>Atividade física semanal:</dt><dd id="resultado_afs"></dd>
-                            </dl>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#section-sexo">Sexo</a>
+                            </h4>
                         </div>
+                        <div id="section-sexo" class="panel-collapse collapse" >
+                            <div class="panel-body">
+                                <form class="form-horizontal">
+                                    <p>Alguma coisa sobre o sexo... bom, hein</p>
+                                    <div class="col-xs-offset-2 col-xs-10">
+                                        <div class="form-group">
+                                            <div class="radio">
+                                                <label><input id="masculino" name="sexo" type="radio" value="M">Masculino</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="radio">
+                                                <label><input id="feminino" name="sexo" type="radio" value="F" />Feminino</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
-                        <h2>Diagnóstico provável</h2>
-                        <div class="col-md-12">
-                            <dl class="dl-horizontal">
-                                <dt>Baixo peso:</dt><dd id="resultado_baixo_peso"></dd>
-                                <dt>Peso normal:</dt><dd id="resultado_peso_normal"></dd>
-                                <dt>Sobrepeso:</dt><dd id="resultado_sobrepeso"></dd>
-                                <dt>Obesidade:</dt><dd id="resultado_obesidade"></dd>
-                                <dt>Total Calórico:</dt><dd id="resultado_total_calorico"></dd>
-                            </dl>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#section-raca">Raça</a>
+                            </h4>
+                        </div>
+                        <div id="section-raca" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <form class="form-horizontal">
+                                    <p>Alguma coisa sobre a raça...</p>
+                                    <div class="col-xs-offset-2 col-xs-10">
+                                        <div class="form-group">
+                                            <div class="radio">
+                                                <label><input id="branca" name="raca" type="radio" value="B" />Branca</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="radio">
+                                                <label><input id="negra"  name="sexo_e_raca" type="radio" value="N" />Negra</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#section-obesidade">Obesidade em relação aos pais</a>
+                            </h4>
+                        </div>
+                        <div id="section-obesidade" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <form class="form-horizontal">
+                                    <p>Alguma coisa sobre a obesidade....</p>
+                                    <div class="col-xs-offset-2 col-xs-10">
+                                        <div class="form-group">
+                                            <div class="radio">
+                                                <label><input type="radio" name="obesidade" value="P" >Pai ou mãe</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="radio">
+                                                <label><input type="radio" name="obesidade" value="A" >Ambos</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="radio">
+                                                <label><input type="radio" name="obesidade" value="N" >Nenhum</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#section-idade">Idade</a>
+                            </h4>
+                        </div>
+                        <div id="section-idade" class="panel-collapse collapse" >
+                            <div class="panel-body">
+                                <form class="form-horizontal">
+                                    <p>Informe aqui sua idade, em número de anos completos, que deve ser entre 7 e 20 anos.</p>
+                                    <div class="form-group">
+                                        <label for="idade" class="col-xs-3 control-label">Idade</label>
+                                        <div class="col-xs-9">
+                                            <input id="idade" class="form-control" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#section-medidas">Medidas</a>
+                            </h4>
+                        </div>
+                        <div id="section-medidas" class="panel-collapse collapse" >
+                            <div class="panel-body">
+                                <form class="form-horizontal">
+                                    <p>Informe aqui seu peso, em kilograms, sua altura e circuferência abdominal em centímetros.</p>
+                                    <div class="form-group">
+                                        <label for="peso" class="col-xs-3 control-label">Peso</label>
+                                        <div class="col-xs-9">
+                                            <input id="peso" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="altura" class="col-xs-3 control-label">Altura</label>
+                                        <div class="col-xs-9">
+                                            <input id="altura" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="circunferencia_abdominal" class="col-xs-3 control-label">Circunferência abdominal</label>
+                                        <div class="col-xs-9">
+                                            <input id="circunferencia_abdominal" class="form-control"/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#section-doencas">Risco de Doenças Crônicas</a>
+                            </h4>
+                        </div>
+                        <div id="section-doencas" class="panel-collapse collapse" >
+                            <div class="panel-body">
+                                <form class="form-horizontal">
+                                    <p>Informe aqui os valores para pressão sistólica e diastólica, em milímetros de mercúrio (mmHg).</p>
+                                    <div class="form-group">
+                                        <label for="pressao_sistolica" class="col-xs-3 control-label">Pressão arterial sistólica</label>
+                                        <div class="col-xs-9">
+                                            <input id="pressao_sistolica"  class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pressao_diastolica" class="col-xs-3 control-label">Pressão arterial diastólica</label>
+                                        <div class="col-xs-9">
+                                            <input id="pressao_diastolica"  class="form-control" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#section-esportes-livres">Esportes livres</a>
+                            </h4>
+                        </div>
+                        <div id="section-esportes-livres" class="panel-collapse collapse" >
+                            <div class="panel-body">
+                                <form id="section-at-livre" class="form-horizontal">
+                                    <h2>Esportes livres</h2>
+                                    <p>Exemplos de esportes livres são: corrida, natação, ciclismo.</p>
+                                    <div class="form-group">
+                                        <label for="esportesLivresFreq" class="col-xs-3 control-label">Frequência</label>
+                                        <div class="col-xs-9">
+                                            <input type="range" class="form-control" id="esportesLivresFreq" min="0" max="7" step="1" value="0">
+                                            <span class="range-label" id="esportesLivresFreqLabel">0 dias por semana</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="esportesLivresMinDiarios" class="col-xs-3 control-label">Minutos diários</label>
+                                        <div class="col-xs-9">
+                                            <input type="number" id="esportesLivresMinDiarios" class="form-control" >
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#section-esportes-coletivos">Esportes coletivos</a>
+                            </h4>
+                        </div>
+                        <div id="section-esportes-coletivos" class="panel-collapse collapse" >
+                            <div class="panel-body">
+                                <form class="form-horizontal">
+                                    <h4>Esportes coletivos</h4>
+                                    <p>Exemplos de esportes coletivos são: futebol, volei, basketball.</p>
+                                    <div class="form-group">
+                                        <label for="esportesColFreq" class="col-xs-3 control-label">Frequência</label>
+                                        <div class="col-xs-9">
+                                            <input type="range" class="form-control" id="esportesColFreq" min="0" max="7" step="1" value="0">
+                                            <span class="range-label" id="esportesColFreqLabel">0 dias por semana</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="esportesLivresMinDiarios" class="col-xs-3 control-label">Minutos diários</label>
+                                        <div class="col-xs-9">
+                                            <input type="number" id="esportesColMinDiarios" class="form-control" >
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#section-esportes-academia">Esportes em academia</a>
+                            </h4>
+                        </div>
+                        <div id="section-esportes-academia" class="panel-collapse collapse" >
+                            <div class="panel-body">
+
+                                <form class="form-horizontal">
+                                    <h4>Esportes em academia</h4>
+                                    <p>Exemplos de esportes coletivos são: musculação e ginástica.</p>
+                                    <p>Exemplos de esportes coletivos são: musculação e ginástica.</p>
+                                    <div class="form-group">
+                                        <label for="esportesColFreq" class="col-xs-3 control-label">Frequência</label>
+                                        <div class="col-xs-9">
+                                            <input type="range" class="form-control" id="esportesAcadFreq" min="0" max="7" step="1" value="0">
+                                            <span class="range-label" id="esportesAcadFreqLabel">0 dias por semana</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="esportesAcadMinDiarios" class="col-xs-3 control-label">Minutos diários</label>
+                                        <div class="col-xs-9">
+                                            <input type="number" id="esportesAcadMinDiarios" class="form-control">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#section-diagnostico">Diagnóstico provável</a>
+                            </h4>
+                        </div>
+                        <div id="section-diagnostico" class="panel-collapse collapse">
+                            <div class="panel-body">
+
+                                <button type="button" class="btn btn-primary" id="run">Calcular</button>
+
+                                <h2>Estado nutricional</h2>
+                                <div class="col-xs-12">
+                                    <dl class="dl-horizontal">
+                                        <dt>IMC:</dt><dd id="resultado_imc" ></dd>
+                                        <dt>Circunferência abdominal:</dt><dd id="resultado_ca"></dd>
+                                        <dt>Pressão arterial:</dt><dd id="resultado_pa"></dd>
+                                        <dt>Obesidade em relação aos pais:</dt><dd id="resultado_afo"></dd>
+                                        <dt>Tempo médio atividade física diária:</dt><dd id="resultado_tmafd"></dd>
+                                        <dt>Atividade física semanal:</dt><dd id="resultado_afs"></dd>
+                                    </dl>
+                                </div>
+
+                                <h2>Diagnóstico provável</h2>
+                                <div class="col-xs-12">
+                                    <dl class="dl-horizontal">
+                                        <dt>Baixo peso:</dt><dd id="resultado_baixo_peso"></dd>
+                                        <dt>Peso normal:</dt><dd id="resultado_peso_normal"></dd>
+                                        <dt>Sobrepeso:</dt><dd id="resultado_sobrepeso"></dd>
+                                        <dt>Obesidade:</dt><dd id="resultado_obesidade"></dd>
+                                        <dt>Total Calórico:</dt><dd id="resultado_total_calorico"></dd>
+                                    </dl>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
