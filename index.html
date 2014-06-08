@@ -22,7 +22,6 @@
                         <div id="section-sexo" class="panel-collapse collapse" >
                             <div class="panel-body">
                                 <form class="form-horizontal">
-                                    <p>Alguma coisa sobre o sexo... bom, hein</p>
                                     <div class="col-xs-offset-2 col-xs-10">
                                         <div class="form-group">
                                             <div class="radio">
@@ -49,7 +48,6 @@
                         <div id="section-raca" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <form class="form-horizontal">
-                                    <p>Alguma coisa sobre a raça...</p>
                                     <div class="col-xs-offset-2 col-xs-10">
                                         <div class="form-group">
                                             <div class="radio">
@@ -76,7 +74,6 @@
                         <div id="section-obesidade" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <form class="form-horizontal">
-                                    <p>Alguma coisa sobre a obesidade....</p>
                                     <div class="col-xs-offset-2 col-xs-10">
                                         <div class="form-group">
                                             <div class="radio">
@@ -108,11 +105,11 @@
                         <div id="section-idade" class="panel-collapse collapse" >
                             <div class="panel-body">
                                 <form class="form-horizontal">
-                                    <p>Informe aqui sua idade, em número de anos completos, que deve ser entre 7 e 20 anos.</p>
                                     <div class="form-group">
                                         <label for="idade" class="col-xs-3 control-label">Idade</label>
                                         <div class="col-xs-9">
-                                            <input id="idade" class="form-control" />
+                                            <input type="range" class="form-control" id="idade" min="7" max="20" step="1" value="7">
+                                            <span class="range-label" id="idadeLabel">anos completos</span>
                                         </div>
                                     </div>
                                 </form>
@@ -129,23 +126,25 @@
                         <div id="section-medidas" class="panel-collapse collapse" >
                             <div class="panel-body">
                                 <form class="form-horizontal">
-                                    <p>Informe aqui seu peso, em kilograms, sua altura e circuferência abdominal em centímetros.</p>
                                     <div class="form-group">
                                         <label for="peso" class="col-xs-3 control-label">Peso</label>
                                         <div class="col-xs-9">
-                                            <input id="peso" class="form-control" />
+                                            <input type="range" class="form-control" id="peso" min="10" max="200" step="1" value="10">
+                                            <span class="range-label" id="pesoLabel">kilogramas</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="altura" class="col-xs-3 control-label">Altura</label>
                                         <div class="col-xs-9">
-                                            <input id="altura" class="form-control" />
+                                            <input type="range" class="form-control" id="altura" min="130" max="200" step="1" value="130">
+                                            <span class="range-label" id="alturaLabel">centímetros</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="circunferencia_abdominal" class="col-xs-3 control-label">Circunferência abdominal</label>
                                         <div class="col-xs-9">
-                                            <input id="circunferencia_abdominal" class="form-control"/>
+                                            <input type="range" class="form-control" id="circunferencia_abdominal" min="30" max="200" step="1" value="30">
+                                            <span class="range-label" id="circunferencia_abdominalLabel">centímetros</span>
                                         </div>
                                     </div>
                                 </form>
@@ -162,17 +161,18 @@
                         <div id="section-doencas" class="panel-collapse collapse" >
                             <div class="panel-body">
                                 <form class="form-horizontal">
-                                    <p>Informe aqui os valores para pressão sistólica e diastólica, em milímetros de mercúrio (mmHg).</p>
                                     <div class="form-group">
                                         <label for="pressao_sistolica" class="col-xs-3 control-label">Pressão arterial sistólica</label>
                                         <div class="col-xs-9">
-                                            <input id="pressao_sistolica"  class="form-control" />
+                                            <input type="range" class="form-control" id="pressao_sistolica" min="30" max="200" step="1" value="30">
+                                            <span class="range-label" id="pressao_sistolicaLabel">mmHg</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="pressao_diastolica" class="col-xs-3 control-label">Pressão arterial diastólica</label>
                                         <div class="col-xs-9">
-                                            <input id="pressao_diastolica"  class="form-control" />
+                                            <input type="range" class="form-control" id="pressao_diastolica" min="30" max="200" step="1" value="30">
+                                            <span class="range-label" id="pressao_diastolicaLabel">mmHg</span>
                                         </div>
                                     </div>
                                 </form>
@@ -190,7 +190,6 @@
                             <div class="panel-body">
                                 <form id="section-at-livre" class="form-horizontal">
                                     <h2>Esportes livres</h2>
-                                    <p>Exemplos de esportes livres são: corrida, natação, ciclismo.</p>
                                     <div class="form-group">
                                         <label for="esportesLivresFreq" class="col-xs-3 control-label">Frequência</label>
                                         <div class="col-xs-9">
@@ -220,7 +219,6 @@
                             <div class="panel-body">
                                 <form class="form-horizontal">
                                     <h4>Esportes coletivos</h4>
-                                    <p>Exemplos de esportes coletivos são: futebol, volei, basketball.</p>
                                     <div class="form-group">
                                         <label for="esportesColFreq" class="col-xs-3 control-label">Frequência</label>
                                         <div class="col-xs-9">
@@ -251,8 +249,6 @@
 
                                 <form class="form-horizontal">
                                     <h4>Esportes em academia</h4>
-                                    <p>Exemplos de esportes coletivos são: musculação e ginástica.</p>
-                                    <p>Exemplos de esportes coletivos são: musculação e ginástica.</p>
                                     <div class="form-group">
                                         <label for="esportesColFreq" class="col-xs-3 control-label">Frequência</label>
                                         <div class="col-xs-9">
