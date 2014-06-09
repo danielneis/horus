@@ -46,5 +46,20 @@ $(function(){
         $("#pressao_diastolicaLabel").text($('#pressao_diastolica').val() + ' mmHg');
     });
 
+    $('#esportesLivresMinDiariosLabel').text($('#esportesLivresMinDiarios').val() + ' minutos por dia');
+    $("#esportesLivresMinDiarios").on('change', function(evnt) {
+        $("#esportesLivresMinDiariosLabel").text($('#esportesLivresMinDiarios').val() + ' minutos por dia');
+    });
+
+    $('#esportesColMinDiariosLabel').text($('#esportesColMinDiarios').val() + ' minutos por dia');
+    $("#esportesColMinDiarios").on('change', function(evnt) {
+        $("#esportesColMinDiariosLabel").text($('#esportesColMinDiarios').val() + ' minutos por dia');
+    });
+
+    $('#esportesAcadMinDiariosLabel').text($('#esportesAcadMinDiarios').val() + ' minutos por dia');
+    $("#esportesAcadMinDiarios").on('change', function(evnt) {
+        $("#esportesAcadMinDiariosLabel").text($('#esportesAcadMinDiarios').val() + ' minutos por dia');
+    });
+
     $('#navbar').affix({offset: {top: 55}});
 });
