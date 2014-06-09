@@ -33,7 +33,7 @@ $(function(){
 
     $('#circunferencia_abdominalLabel').text($('#circunferencia_abdominal').val() + ' centímetros');
     $("#circunferencia_abdominal").on('change', function(evnt) {
-        $("#circunferencia_abdominalLabel").text($('#circunferencia_abdominal').val() + ' centímeros');
+        $("#circunferencia_abdominalLabel").text($('#circunferencia_abdominal').val() + ' centímetros');
     });
 
     $('#pressao_sistolicaLabel').text($('#pressao_sistolica').val() + ' mmHg');
