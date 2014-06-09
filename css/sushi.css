@@ -17,3 +17,12 @@ input[type="range"] {
     vertical-align: 70%;
     margin-left: 0.5em;
 }
+
+.panel-heading {
+    padding: 0;
+}
+
+a {
+    display: block;
+    padding: 20px 30px;
+}
